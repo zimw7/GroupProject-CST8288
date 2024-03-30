@@ -1,23 +1,32 @@
+<%-- 
+    Document   : register
+    Created on : Mar. 30, 2024, 1:39:51 p.m.
+    Author     : 
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
     </head>
     <body>
-        <div><a href="AuthorsServlet">List Authors</a></div>
+        <h2>User Login</h2>
+        
+        <% if (request.getAttribute("errorMessage") != null) { %>
+            <p style="color:red;"><%= request.getAttribute("errorMessage") %></p>
+        <% } %>
+        
+        <form action="${pageContext.request.contextPath}/login" method="post">
+            Username: <input type="text" name="username" required><br><br>
+            Password: <input type="password" name="password" required><br><br>
+            
+            <input type="submit" value="Login">
+        </form><br>
+            <p>Not a user? &#8594; <a href="${pageContext.request.contextPath}/register.jsp">Register</a></p>
+         
 
-        <FORM ACTION="AuthorsServlet" METHOD="POST">
-            First Name:
-            <INPUT TYPE="TEXT" NAME="firstName" ><BR>
-            Last Name:
-            <INPUT TYPE="TEXT" NAME="lastName" ><P>
-                <INPUT TYPE="SUBMIT"> <!-- Press this button to submit form -->
-        </FORM>
+            
     </body>
 </html>
+

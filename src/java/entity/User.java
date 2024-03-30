@@ -61,7 +61,7 @@ public class User {
         this.email = email;
     }
 
-    public boolean isIsSubscribed() {
+    public boolean isSubscribed() {
         return isSubscribed;
     }
 
