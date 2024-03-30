@@ -9,4 +9,7 @@ public interface FoodDao {
     void deleteFood(int foodId);
     Food getFoodById(int foodId);
     List<Food> getAllFoods();
+    List<Food> getSurplusFoodsForDonation();
+    List<Food> getSurplusFoodsForSale();
+    
 }
