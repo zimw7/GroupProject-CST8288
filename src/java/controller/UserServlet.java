@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import service.UserService;
-import service.UserServiceImpl;
+import service.impl.UserServiceImpl;
 
 @WebServlet("/login")
 public class UserServlet extends HttpServlet {
