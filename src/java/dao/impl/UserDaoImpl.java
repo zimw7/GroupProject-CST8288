@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
                 stmt.setString(3, user.getUserType().toString());
                 stmt.setString(4, user.getPhoneNumber());
                 stmt.setString(5, user.getEmail());
-                stmt.setBoolean(6, user.isIsSubscribed());
+                stmt.setBoolean(6, user.isSubscribed());
                 stmt.executeUpdate();
             }
         } catch (SQLException e) {
