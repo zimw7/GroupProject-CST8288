@@ -1,9 +1,20 @@
 package entity;
 
+import util.FoodType;
+
 public class SurplusFood extends Food { 
 
+    private FoodType type;
     private double discountRate;
     private boolean isForDonation;
+    
+     public FoodType getType() {
+        return type;
+    }
+
+    public void setType(FoodType type) {
+        this.type = type;
+    }
     
     public double getDiscountRate() {
         return discountRate;

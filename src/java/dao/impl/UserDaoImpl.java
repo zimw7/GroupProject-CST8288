@@ -13,21 +13,22 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "INSERT INTO USERS (USER_NAME, PASSWORD, USER_TYPE, PHONE_NUMBER, EMAIL, IS_SUBSCRIBED) VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, user.getUserName());
-                stmt.setString(2, user.getPassword());
-                stmt.setString(3, user.getUserType().toString());
-                stmt.setString(4, user.getPhoneNumber());
-                stmt.setString(5, user.getEmail());
-                stmt.setBoolean(6, user.isSubscribed());
-                stmt.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    String sql = "INSERT INTO USERS (USER_NAME, PASSWORD, USER_TYPE, PHONE_NUMBER, EMAIL, IS_SUBSCRIBED) VALUES (?, ?, ?, ?, ?, ?)";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, user.getUserName());
+        stmt.setString(2, user.getPassword());
+        stmt.setString(3, user.getUserType().toString());
+        stmt.setString(4, user.getPhoneNumber());
+        stmt.setString(5, user.getEmail());
+        stmt.setBoolean(6, user.isSubscribed());
+        int affectedRows = stmt.executeUpdate();
+        System.out.println("Affected rows: " + affectedRows);
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
+
 
     @Override
     public void updateUser(User user) { }
@@ -61,6 +62,19 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
     
+    @Override
+     public void updateUserIsSubscribed(int userId, boolean isSubscribed) {
+        String sql = "UPDATE users SET is_subscribed = ? WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setBoolean(1, isSubscribed);
+            stmt.setInt(2, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+     
     
     @Override
     public List<User> getAllUsers() { return new ArrayList<>();  }

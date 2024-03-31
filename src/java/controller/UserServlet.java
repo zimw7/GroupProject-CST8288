@@ -1,5 +1,6 @@
 package controller;
 
+import entity.User;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -9,10 +10,9 @@ import service.impl.UserServiceImpl;
 
 @WebServlet("/index")
 public class UserServlet extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
@@ -20,15 +20,19 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        
+
+        // Logging for debugging purposes
         System.out.println(userName);
         System.out.println(password);
-        
+
         UserService userService = new UserServiceImpl();
         boolean loginSuccess = userService.login(userName, password);
-        
+
         if (loginSuccess) {
-            response.sendRedirect(request.getContextPath() + "/home.jsp");
+            User user = userService.getUserByUsername(userName);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            response.sendRedirect(request.getContextPath() + "/views/home.jsp");
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
             request.getRequestDispatcher("/index.jsp").forward(request, response);

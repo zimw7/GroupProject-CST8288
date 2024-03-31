@@ -1,7 +1,7 @@
 <%-- 
     Document   : register
     Created on : Mar. 30, 2024, 5:10:07 p.m.
-    Author     : Zimeng
+    Author     : Zimeng Wang
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,11 +17,18 @@
         <% if (request.getAttribute("errorMessage") != null) { %>
             <p style="color:red;"><%= request.getAttribute("errorMessage") %></p>
         <% } %>
+
+        <% if (request.getAttribute("successMessage") != null) { %>
+            <p style="color:green;"><%= request.getAttribute("successMessage") %></p>
+        <% } %>
+
         
         <form action="${pageContext.request.contextPath}/register" method="post">
             Username: <input type="text" name="username" required><br><br>
             Password: <input type="password" name="password" required><br><br>
             Email: <input type="email" name="email" required><br><br>
+            Phone Number: <input type="text" name="phoneNumber" required><br><br>
+
             
             <label>User Type:</label><br><br>
             <input type="radio" id="retail" name="userType" value="RETAIL" required>
