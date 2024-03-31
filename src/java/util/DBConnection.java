@@ -12,12 +12,13 @@ public class DBConnection {
     private static Connection connection;
 
     static {
-    try {
-        initializeConnection();
-    } catch (Exception e) {
-        e.printStackTrace(); 
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-}
+
 
 
     private static void initializeConnection() {
@@ -37,12 +38,6 @@ public class DBConnection {
         } catch (SQLException e) {
             throw new RuntimeException("Error establishing database connection", e);
         }
-        
-        try {
-    Class.forName("com.mysql.cj.jdbc.Driver");
-} catch (ClassNotFoundException e) {
-    throw new RuntimeException("MySQL JDBC driver not found", e);
-}
         
     }
 

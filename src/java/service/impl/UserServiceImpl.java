@@ -17,24 +17,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean login(String username, String password) {
         User user = userDao.getUserByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
-            return true;
-        }
-        return false;
+        return user != null && user.getPassword().equals(password);
     }
 
     @Override
     public boolean register(User user) {
         User existingUser = userDao.getUserByUsername(user.getUserName());
-        if (existingUser == null) {
-            userDao.addUser(user);
-            return true;
+        if (existingUser != null) {
+            // User already exists
+            return false;
         }
-        return false;
+        userDao.addUser(user);
+        return true;
     }
 
     @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers(); 
+    }
+    
+    @Override
+    public User getUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
     }
 }

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : register
+    Document   : index
     Created on : Mar. 30, 2024, 1:39:51 p.m.
-    Author     : 
+    Author     : Zimeng Wang
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,7 +23,7 @@
             
             <input type="submit" value="Login">
         </form><br>
-            <p>Not a user? &#8594; <a href="${pageContext.request.contextPath}/register.jsp">Register</a></p>
+            <p>Not a user? &#8594; <a href="${pageContext.request.contextPath}/views/register.jsp">Register</a></p>
          
 
             
