@@ -12,6 +12,7 @@
     <title>Charity Dashboard</title>
 </head>
 <body>
+    <h2>&#129386; FoodSaver &#129386;</h2><br>
     <h2>Welcome, <%= ((User)session.getAttribute("user")).getUserName() %>!</h2>
     <h3>Charitable Organization Dashboard</h3>
     

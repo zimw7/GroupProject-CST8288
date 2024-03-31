@@ -9,6 +9,7 @@ public class Subscription {
     private User user;
     private ContactType contactType;
     private PreferenceType preferenceType;
+    private String retailerUsername;
 
      public User getUser() {
         return user;
@@ -34,6 +35,12 @@ public class Subscription {
     }
     public void setPreferenceType(PreferenceType preferenceType) {
         this.preferenceType = preferenceType;
+    }
+    public String getRetailerUsername() {
+    return retailerUsername;
+    }
+    public void setRetailerUsername(String retailerUsername) {
+        this.retailerUsername = retailerUsername;
     }
 
 }

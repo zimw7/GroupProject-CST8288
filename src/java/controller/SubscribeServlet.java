@@ -25,6 +25,7 @@ public class SubscribeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String preferenceType = request.getParameter("preferenceType");
         String contactType = request.getParameter("contactType");
+        String retailerUsername = request.getParameter("retailer_username");
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -34,6 +35,7 @@ public class SubscribeServlet extends HttpServlet {
             subscription.setUser(user);
             subscription.setPreferenceType(PreferenceType.valueOf(preferenceType));
             subscription.setContactType(ContactType.valueOf(contactType));
+            subscription.setRetailerUsername(retailerUsername); 
 
             subscriptionService.subscribe(subscription); 
             request.setAttribute("successMessage", "Subscription added successfully!");
