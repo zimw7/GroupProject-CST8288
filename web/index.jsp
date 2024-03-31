@@ -17,7 +17,7 @@
             <p style="color:red;"><%= request.getAttribute("errorMessage") %></p>
         <% } %>
         
-        <form action="${pageContext.request.contextPath}/login" method="post">
+        <form action="${pageContext.request.contextPath}/index" method="post">
             Username: <input type="text" name="username" required><br><br>
             Password: <input type="password" name="password" required><br><br>
             

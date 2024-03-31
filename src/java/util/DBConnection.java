@@ -3,23 +3,31 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static Connection connection; 
+    private static Connection connection;
 
     static {
+    try {
         initializeConnection();
+    } catch (Exception e) {
+        e.printStackTrace(); 
     }
+}
+
 
     private static void initializeConnection() {
         Properties properties = new Properties();
-        try {
-            FileInputStream fis = new FileInputStream("database.properties");
-            properties.load(fis);
+     
+        try (InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("database.properties")) {
+            if (input == null) {
+                throw new RuntimeException("database.properties file not found in the classpath");
+            }
+            properties.load(input);
             String url = properties.getProperty("jdbc.url");
             String user = properties.getProperty("jdbc.username");
             String password = properties.getProperty("jdbc.password");
@@ -29,6 +37,13 @@ public class DBConnection {
         } catch (SQLException e) {
             throw new RuntimeException("Error establishing database connection", e);
         }
+        
+        try {
+    Class.forName("com.mysql.cj.jdbc.Driver");
+} catch (ClassNotFoundException e) {
+    throw new RuntimeException("MySQL JDBC driver not found", e);
+}
+        
     }
 
     public static Connection getConnection() {
