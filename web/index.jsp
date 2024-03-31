@@ -11,6 +11,7 @@
         <title>Login</title>
     </head>
     <body>
+        <h2>&#129386; FoodSaver &#129386;</h2><br>
         <h2>User Login</h2>
         
         <% if (request.getAttribute("errorMessage") != null) { %>
@@ -22,7 +23,7 @@
             Password: <input type="password" name="password" required><br><br>
             
             <input type="submit" value="Login">
-        </form><br>
+        </form><br><br>
             <p>Not a user? &#8594; <a href="${pageContext.request.contextPath}/views/register.jsp">Register</a></p>
          
 

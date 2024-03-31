@@ -12,6 +12,7 @@
     <title>Home</title>
 </head>
 <body>
+    <h2>&#129386; FoodSaver &#129386;</h2><br>
     <%
         User user = (User) session.getAttribute("user");
         if (user != null) {

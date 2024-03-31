@@ -12,6 +12,7 @@
         <title>Register</title>
     </head>
     <body>
+        <h2>&#129386; FoodSaver &#129386;</h2><br>
         <h2>User Register</h2>
         
         <% if (request.getAttribute("errorMessage") != null) { %>

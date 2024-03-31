@@ -12,12 +12,13 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
 
     @Override
 public void addSubscription(Subscription subscription) {
-    String sql = "INSERT INTO SUBSCRIPTION (USER_ID, CONTACT_TYPE, PREFERENCE_TYPE) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO SUBSCRIPTION (USER_ID, CONTACT_TYPE, PREFERENCE_TYPE, RETAILER_USERNAME) VALUES (?, ?, ?, ?)";
     try (Connection conn = DBConnection.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setInt(1, subscription.getUser().getId());
         stmt.setString(2, subscription.getContactType().toString());
         stmt.setString(3, subscription.getPreferenceType().toString());
+        stmt.setString(4, subscription.getRetailerUsername());
         int rowsAffected = stmt.executeUpdate();
         System.out.println("Rows affected: " + rowsAffected);
     } catch (SQLException e) {
