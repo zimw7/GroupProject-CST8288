@@ -8,10 +8,10 @@ import java.util.List;
 import util.ContactType;
 
 public class SurplusFoodService {
-    private NotificationService notificationService;
+    private NotificationServiceImpl notificationService;
     private SubscriptionDao subscriptionDao;
     
-    public SurplusFoodService(NotificationService notificationService, SubscriptionDao subscriptionDao) {
+    public SurplusFoodService(NotificationServiceImpl notificationService, SubscriptionDao subscriptionDao) {
         this.notificationService = notificationService;
         this.subscriptionDao = subscriptionDao;
     }
