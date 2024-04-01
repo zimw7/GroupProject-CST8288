@@ -11,7 +11,7 @@ public class Food {
     private double price;
     private FoodType foodType;
     private Date expirationDate;
-    private User user; 
+    private int userID;
 
     public int getId() {
         return id;
@@ -61,13 +61,12 @@ public class Food {
         this.expirationDate = expirationDate;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
-   
 }

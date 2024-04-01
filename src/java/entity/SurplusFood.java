@@ -4,18 +4,9 @@ import util.FoodType;
 
 public class SurplusFood extends Food { 
 
-    private FoodType type;
     private double discountRate;
     private boolean isForDonation;
-    
-     public FoodType getType() {
-        return type;
-    }
 
-    public void setType(FoodType type) {
-        this.type = type;
-    }
-    
     public double getDiscountRate() {
         return discountRate;
     }
@@ -23,13 +14,14 @@ public class SurplusFood extends Food {
     public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
     }
-    
-    public boolean isForDonation() {
+
+    public boolean isIsForDonation() {
         return isForDonation;
     }
 
-    public void setForDonation(boolean isForDonation) {
+    public void setIsForDonation(boolean isForDonation) {
         this.isForDonation = isForDonation;
     }
+    
 
 }
