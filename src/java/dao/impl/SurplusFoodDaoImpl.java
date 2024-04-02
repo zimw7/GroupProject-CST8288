@@ -97,7 +97,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
     @Override
     public List<SurplusFood> getAllSurplusFoods() {
         List<SurplusFood> surplusfoods = new ArrayList<>();
-        String sql = "SELECT * FROM SURPLUS_FOOD ORDERED BY ID";
+        String sql = "SELECT * FROM SURPLUS_FOOD ORDER BY ID";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 SurplusFood surplusfood = new SurplusFood();
