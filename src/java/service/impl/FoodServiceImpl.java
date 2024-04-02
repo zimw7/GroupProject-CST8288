@@ -5,22 +5,18 @@
 package service.impl;
 
 import dao.FoodDao;
-import dao.SurplusFoodDao;
 import dao.impl.FoodDaoImpl;
-import dao.impl.SurplusFoodDaoImpl;
 import entity.Food;
-import entity.SurplusFood;
 import entity.User;
 import java.util.List;
 import service.FoodService;
 
 public class FoodServiceImpl implements FoodService {
+
     private FoodDao foodDao = null;
-    private SurplusFoodDao surplusfoodDao = null;
-    
-    public FoodServiceImpl(){
+
+    public FoodServiceImpl() {
         foodDao = new FoodDaoImpl();
-        surplusfoodDao = new SurplusFoodDaoImpl();
     }
 
     @Override
@@ -29,8 +25,24 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<SurplusFood> getAllSurplusFood() {
-        return surplusfoodDao.getAllSurplusFoods();
+    public void addFoodInventory(Food food) {
+        foodDao.addFood(food);
     }
+
+    @Override
+    public Food getFoodDetail(int foodID) {
+        return foodDao.getFoodById(foodID);
+    }
+
+    @Override
+    public void updateOneFood(Food food) {
+        foodDao.updateFood(food);
+    }
+
+    @Override
+    public void deleteOneFood(Food food) {
+        foodDao.deleteFood(food.getId());
+    }
+    
     
 }

@@ -20,14 +20,14 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
 
     @Override
     public void addSurplusFood(SurplusFood surplusfood) {
-        String sql = "INSERT INTO FOOD (NAME, QUANTITY, PRICE, FOOD_TYPE, EXPIRATION_DATE, USER_ID, DISCOUNT_RATE, IS_FOR_DONATION) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SURPLUS_FOOD (NAME, QUANTITY, FOOD_TYPE, EXPIRATION_DATE, PRICE, DISCOUNT_RATE, IS_FOR_DONATION, USER_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, surplusfood.getName());
             stmt.setInt(2, surplusfood.getQuantity());
-            stmt.setDouble(3, surplusfood.getPrice());
-            stmt.setString(4, surplusfood.getFoodType().toString());
-            stmt.setDate(5, new java.sql.Date(surplusfood.getExpirationDate().getTime()));
+            stmt.setString(3, surplusfood.getFoodType().toString());
+            stmt.setDate(4, new java.sql.Date(surplusfood.getExpirationDate().getTime()));
+            stmt.setDouble(5, surplusfood.getPrice());
             stmt.setDouble(6, surplusfood.getDiscountRate());
             stmt.setBoolean(7, surplusfood.isIsForDonation());
             stmt.setInt(8, surplusfood.getUserID());
@@ -83,6 +83,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
                     surplusfood.setPrice(rs.getDouble("PRICE"));
                     surplusfood.setFoodType(FoodType.valueOf(rs.getString("FOOD_TYPE")));
                     surplusfood.setExpirationDate(rs.getDate("EXPIRATION_DATE"));
+                    surplusfood.setDiscountRate(rs.getDouble("DISCOUNT_RATE"));
                     surplusfood.setIsForDonation(rs.getBoolean("IS_FOR_DONATION"));
                     surplusfood.setUserID(rs.getInt("USER_ID"));
                     return surplusfood;
@@ -107,6 +108,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
                 surplusfood.setPrice(rs.getDouble("PRICE"));
                 surplusfood.setFoodType(FoodType.valueOf(rs.getString("FOOD_TYPE")));
                 surplusfood.setExpirationDate(rs.getDate("EXPIRATION_DATE"));
+                surplusfood.setDiscountRate(rs.getDouble("DISCOUNT_RATE"));
                 surplusfood.setIsForDonation(rs.getBoolean("IS_FOR_DONATION"));
                 surplusfood.setUserID(rs.getInt("USER_ID"));
                 surplusfoods.add(surplusfood);
@@ -130,6 +132,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
                 surplusfood.setPrice(rs.getDouble("PRICE"));
                 surplusfood.setFoodType(FoodType.valueOf(rs.getString("FOOD_TYPE")));
                 surplusfood.setExpirationDate(rs.getDate("EXPIRATION_DATE"));
+                surplusfood.setDiscountRate(rs.getDouble("DISCOUNT_RATE"));
                 surplusfood.setIsForDonation(rs.getBoolean("IS_FOR_DONATION"));
                 surplusfood.setUserID(rs.getInt("USER_ID"));
                 surplusfoods.add(surplusfood);
@@ -143,7 +146,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
     @Override
     public List<SurplusFood> getSurplusFoodsForSale() {
         List<SurplusFood> surplusfoods = new ArrayList<>();
-        String sql = "SELECT * FROM FOOD WHERE IS_FOR_DONATION = FALSE";
+        String sql = "SELECT * FROM SURPLUS_FOOD WHERE IS_FOR_DONATION = FALSE";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 SurplusFood surplusfood = new SurplusFood();
@@ -153,6 +156,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
                 surplusfood.setPrice(rs.getDouble("PRICE"));
                 surplusfood.setFoodType(FoodType.valueOf(rs.getString("FOOD_TYPE")));
                 surplusfood.setExpirationDate(rs.getDate("EXPIRATION_DATE"));
+                surplusfood.setDiscountRate(rs.getDouble("DISCOUNT_RATE"));
                 surplusfood.setIsForDonation(rs.getBoolean("IS_FOR_DONATION"));
                 surplusfood.setUserID(rs.getInt("USER_ID"));
                 surplusfoods.add(surplusfood);
