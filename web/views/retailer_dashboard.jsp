@@ -25,7 +25,7 @@
             <form action="getFoodDetail.do" method="post">
                 <select name="selectOption" id="selectOption">
                     <% for (Food food : foodsInventory) {%>
-                    <option value="<%= food.getId() %>"> <%= food.getName() %> </option>
+                    <option value="<%= food.getId()%>"> <%= food.getName()%> </option>
                     <% } %>
                 </select>
                 <input type="hidden" name="updateFlag" value="1"> 
@@ -34,13 +34,13 @@
             <form action="getFoodDetail.do" method="post">
                 <select name="selectOption" id="selectOption">
                     <% for (Food food : foodsInventory) {%>
-                    <option value="<%= food.getId() %>"> <%= food.getName() %> </option>
+                    <option value="<%= food.getId()%>"> <%= food.getName()%> </option>
                     <% } %>
                 </select>
                 <input type="hidden" name="updateFlag" value="0"> 
                 <button class="but" type="submit">List as surplus food</button>
             </form><br>
-            
+
             <br>
             <table border="1">
                 <thead>
@@ -62,6 +62,7 @@
                         <td><%= food.getPrice()%></td>
                         <td><%= food.getFoodType().toString()%></td>
                         <td><%= food.getExpirationDate()%></td>
+                
                     </tr>
                     <% }%>
                 </tbody>
