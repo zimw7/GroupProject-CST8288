@@ -98,7 +98,7 @@ public class FoodServlet extends HttpServlet {
             method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
             method.invoke(this, request, response);
         } catch (Exception e) {
-            throw new RuntimeException("method error");
+            throw new RuntimeException("method error" + methodName, e);
         }
     }
 
