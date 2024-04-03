@@ -19,15 +19,17 @@
     <div>
         <h4>Purchase Discounted Items</h4>
         
-    </div>
-    <br>
+    </div><br>
+    
     <div>
         <h4>Subscribe to Surplus Food Alerts</h4>
         <p>&#128071; &#128071; &#128071;</p>
         <a href="consumer_subscription.jsp">Subscribe Now</a>
         
-    </div>
-    <br><br>
-    <p><a href="../index">&#128075; Log out </a></p>
+    </div><br><br>
+    
+    
+    <p><a href="../logout">&#128075; Log out </a></p>
+
 </body> 
 </html>

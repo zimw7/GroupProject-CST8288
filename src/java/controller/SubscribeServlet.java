@@ -10,6 +10,7 @@ import service.SubscriptionService;
 import service.impl.SubscriptionServiceImpl;
 import util.ContactType;
 import util.PreferenceType;
+import util.SubscriptionResult;
 
 
 @WebServlet(name = "SubscribeServlet", urlPatterns = {"/SubscribeServlet"})
@@ -29,6 +30,8 @@ public class SubscribeServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        
+        
 
         if (user != null) {
             Subscription subscription = new Subscription();
@@ -37,9 +40,17 @@ public class SubscribeServlet extends HttpServlet {
             subscription.setContactType(ContactType.valueOf(contactType));
             subscription.setRetailerUsername(retailerUsername); 
 
-            subscriptionService.subscribe(subscription); 
-            request.setAttribute("successMessage", "Subscription added successfully!");
+            
+
+            SubscriptionResult result = subscriptionService.subscribe(subscription);
+            if (result == SubscriptionResult.ALREADY_SUBSCRIBED) {
+                request.setAttribute("errorMessage", "You've already subscribed to this preference. Thank you for your subscription!");
+            } else {
+                request.setAttribute("successMessage", "Subscription added successfully!");
+            }
             request.getRequestDispatcher("/views/consumer_subscription.jsp").forward(request, response);
+
+
 
 
         } else {

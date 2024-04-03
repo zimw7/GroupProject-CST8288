@@ -5,6 +5,7 @@ import dao.impl.UserDaoImpl;
 import entity.User;
 import service.UserService;
 import java.util.List;
+import util.LoginResult;
 
 public class UserServiceImpl implements UserService {
 
@@ -15,9 +16,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(String username, String password) {
+    public LoginResult login(String username, String password) {
         User user = userDao.getUserByUsername(username);
-        return user != null && user.getPassword().equals(password);
+        if (user == null) {
+            return LoginResult.USER_NOT_FOUND;
+        }
+        if (user.getPassword().equals(password)) {
+            return LoginResult.SUCCESS;
+        } else {
+            return LoginResult.INVALID_PASSWORD;
+        }
     }
 
     @Override

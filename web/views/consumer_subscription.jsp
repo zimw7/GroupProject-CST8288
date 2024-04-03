@@ -14,9 +14,13 @@
     <h2>&#129386; FoodSaver &#129386;</h2><br>
     <h2>Subscribe to Surplus Food Alerts</h2>
     
-    <% if (request.getAttribute("successMessage") != null) { %>
-        <p style="color:green;"><%= request.getAttribute("successMessage").toString() %></p>
+    <% if (request.getAttribute("errorMessage") != null) { %>
+        <p style="color:red;"><%= request.getAttribute("errorMessage") %></p>
     <% } %>
+    <% if (request.getAttribute("successMessage") != null) { %>
+        <p style="color:green;"><%= request.getAttribute("successMessage") %></p>
+    <% } %>
+
     
     <form action="${pageContext.request.contextPath}/SubscribeServlet" method="post">
         <label for="preference">Food Preference:</label>

@@ -7,6 +7,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import service.UserService;
 import service.impl.UserServiceImpl;
+import util.LoginResult;
 
 @WebServlet("/index")
 public class UserServlet extends HttpServlet {
@@ -21,21 +22,28 @@ public class UserServlet extends HttpServlet {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
 
-        // Logging for debugging purposes
-        System.out.println(userName);
-        System.out.println(password);
-
         UserService userService = new UserServiceImpl();
-        boolean loginSuccess = userService.login(userName, password);
+        LoginResult result = userService.login(userName, password); 
 
-        if (loginSuccess) {
-            User user = userService.getUserByUsername(userName);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            response.sendRedirect(request.getContextPath() + "/views/home.jsp");
-        } else {
-            request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        switch (result) {
+            case SUCCESS:
+                User user = userService.getUserByUsername(userName);
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                response.sendRedirect(request.getContextPath() + "/views/home.jsp");
+                break;
+            case USER_NOT_FOUND:
+                request.setAttribute("errorMessage", "Username not found");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                break;
+            case INVALID_PASSWORD:
+                request.setAttribute("errorMessage", "Invalid password");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                break;
+            default:
+                request.setAttribute("errorMessage", "An error occurred");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                break;
         }
     }
 }

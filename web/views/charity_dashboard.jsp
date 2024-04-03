@@ -1,8 +1,4 @@
-<%-- 
-    Document   : charity_dashboard
-    Created on : Mar. 30, 2024, 11:03:57 p.m.
-    Author     : Zimeng
---%>
+
 
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

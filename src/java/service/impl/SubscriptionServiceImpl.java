@@ -7,11 +7,9 @@ import dao.impl.UserDaoImpl;
 import entity.Subscription;
 import java.util.List;
 import service.SubscriptionService;
+import util.SubscriptionResult;
 
-/**
- *
- * @author Zimeng
- */
+
 public class SubscriptionServiceImpl implements SubscriptionService {
 
     private UserDao userDao; 
@@ -23,18 +21,20 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public void subscribe(Subscription subscription) {
+    public SubscriptionResult subscribe(Subscription subscription) {
         List<Subscription> existingSubscriptions = subscriptionDao.findSubscriptionsByUserAndPreference(
-                subscription.getUser().getId(), subscription.getPreferenceType().toString());
+                subscription.getUser().getId(), subscription.getPreferenceType().toString(), subscription.getRetailerUsername());
 
-        if (existingSubscriptions.isEmpty()) {
-            subscriptionDao.addSubscription(subscription);
+        if (!existingSubscriptions.isEmpty()) {
+            return SubscriptionResult.ALREADY_SUBSCRIBED;
         } else {
-            System.out.println("You've already subscribed to this preference.");
+            subscriptionDao.addSubscription(subscription);
+            userDao.updateUserIsSubscribed(subscription.getUser().getId(), true);
+            return SubscriptionResult.SUCCESS;
         }
-        
-        userDao.updateUserIsSubscribed(subscription.getUser().getId(), true);
     }
+
+
 
 
     @Override

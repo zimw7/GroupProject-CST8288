@@ -7,6 +7,7 @@ import util.FoodType;
 public interface SubscriptionDao {
     void addSubscription(Subscription subscription);
     void deleteSubscription(int subscriptionId);
-    List<Subscription> findSubscriptionsByUserAndPreference(int userId, String preferenceType);
     List<Subscription> getSubscriptionsByPreference(FoodType foodType); 
+    List<Subscription> findSubscriptionsByUserAndPreference(int userId, String preferenceType, String retailerUsername);
+
 }
