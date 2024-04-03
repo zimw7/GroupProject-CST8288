@@ -1,8 +1,4 @@
-<%-- 
-    Document   : retailer_dashboard
-    Created on : Mar. 30, 2024, 11:03:48 p.m.
-    Author     : Zimeng
---%>
+
 <%@page import="java.util.List" %>
 <%@page import="entity.Food" %>
 <%@page import="entity.SurplusFood" %>

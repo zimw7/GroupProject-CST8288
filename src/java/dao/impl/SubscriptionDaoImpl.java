@@ -41,13 +41,14 @@ public void addSubscription(Subscription subscription) {
     }
 
     @Override
-    public List<Subscription> findSubscriptionsByUserAndPreference(int userId, String preferenceType) {
+    public List<Subscription> findSubscriptionsByUserAndPreference(int userId, String preferenceType, String retailerUsername) {
         List<Subscription> subscriptions = new ArrayList<>();
-        String sql = "SELECT * FROM Subscription WHERE user_id = ? AND preference_type = ?";
+        String sql = "SELECT * FROM Subscription WHERE user_id = ? AND preference_type = ? AND retailer_username = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userId);
             stmt.setString(2, preferenceType);
+            stmt.setString(3, retailerUsername);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Subscription subscription = new Subscription();
