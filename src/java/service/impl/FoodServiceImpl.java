@@ -18,6 +18,10 @@ public class FoodServiceImpl implements FoodService {
     public FoodServiceImpl() {
         foodDao = new FoodDaoImpl();
     }
+    
+    public FoodServiceImpl(FoodDao foodDao) {
+        this.foodDao = foodDao;
+    }
 
     @Override
     public List<Food> getFoodInventoryByUser(User user) {

@@ -34,9 +34,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         }
     }
 
-
-
-
     @Override
     public void unsubscribe(int subscriptionId) {
         subscriptionDao.deleteSubscription(subscriptionId);
