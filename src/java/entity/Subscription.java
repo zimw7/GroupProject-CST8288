@@ -11,6 +11,17 @@ public class Subscription {
     private PreferenceType preferenceType;
     private String retailerUsername;
 
+    public Subscription() {
+    }
+
+    public Subscription(int id, User user, ContactType contactType, PreferenceType preferenceType, String retailerUsername) {
+        this.id = id;
+        this.user = user;
+        this.contactType = contactType;
+        this.preferenceType = preferenceType;
+        this.retailerUsername = retailerUsername;
+    }
+
      public User getUser() {
         return user;
     }

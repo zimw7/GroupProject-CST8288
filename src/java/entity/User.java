@@ -12,6 +12,19 @@ public class User {
     private String phoneNumber;
     private String email;
     private boolean isSubscribed;
+
+    public User() {
+    }
+
+    public User(int id, String userName, String password, UserType userType, String phoneNumber, String email, boolean isSubscribed) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.userType = userType;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.isSubscribed = isSubscribed;
+    }
     
     public int getId() {
         return id;
