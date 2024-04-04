@@ -13,5 +13,5 @@ public interface FoodService {
     void addFoodInventory(Food food);
     Food getFoodDetail(int foodID);
     void updateOneFood(Food food);
-    void deleteOneFood(Food food);
+    void deleteOneFood(int foodID);
 }

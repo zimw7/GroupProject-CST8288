@@ -19,7 +19,7 @@
             out.println("<h2>Welcome, " + user.getUserName() + "!</h2>");
             switch(user.getUserType()) {
                 case RETAIL:
-                    response.sendRedirect("../FoodServlet");
+                    response.sendRedirect("../RetailerServlet");
                     break;
                 case CUSTOMER:
                     response.sendRedirect("consumer_dashboard.jsp"); 

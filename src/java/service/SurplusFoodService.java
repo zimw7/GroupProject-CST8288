@@ -10,5 +10,7 @@ import java.util.List;
 public interface SurplusFoodService {
         List<SurplusFood> getAllSurplusFood();
         void addSurplusFood(SurplusFood surplusfood);
-        void deleteSurplusFood(SurplusFood surplusfood);     
+        void deleteSurplusFood(int surplusfoodID);   
+        SurplusFood getSurplusFoodDetail(int surplusfoodID);
+        void updateSurplusFood(SurplusFood food);
 }
