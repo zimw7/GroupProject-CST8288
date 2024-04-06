@@ -71,10 +71,9 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
         surplusfoodDao.updateSurplusFood(surplusfood);
     }
     
-    
     @Override
-    public void deleteSurplusFood(int foodId) {
-        surplusfoodDao.deleteSurplusFood(foodId); 
+    public void updateFoodQuantity(int foodID, int quantity) {
+        surplusfoodDao.updateFoodQuantity(foodID, quantity);
     }
     
     @Override
@@ -97,4 +96,7 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
          return surplusfoodDao.getSurplusFoodsForDonation();
     }
 
+    
+    
+    
 }
