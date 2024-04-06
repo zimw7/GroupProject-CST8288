@@ -56,7 +56,7 @@ public class RetailerServlet extends HttpServlet {
         List<SurplusFood> surplusfoods = null;
 
         foodsInventory = foodService.getFoodInventoryByUser(user);
-        surplusfoods = surplusFoodService.getAllSurplusFood();
+        surplusfoods = surplusFoodService.getSurplusFoodByUser(user);
 
         request.setAttribute("foodsInventory", foodsInventory);
         request.setAttribute("surplusfoods", surplusfoods);
@@ -253,6 +253,16 @@ public class RetailerServlet extends HttpServlet {
         surplusFoodService.updateSurplusFood(surplusfood);
         request.setAttribute("successMessage", "Add food item successful! Please go back to dashboard");
         request.getRequestDispatcher("/views/updateSurplusFood.jsp").forward(request, response);
+    }
+    
+    private void unSurplusFood(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int surplusfoodID = Integer.parseInt(request.getParameter("selectOption"));
+        SurplusFood surplusfood = surplusFoodService.getSurplusFoodDetail(surplusfoodID);
+        surplusFoodService.deleteSurplusFood(surplusfoodID);
+        foodService.addFoodInventory(surplusfood);
+        request.setAttribute("successMessage", "Unsurplus food item successful!");
+        doGet(request, response);
     }
     
     private void deleteSurplusFood(HttpServletRequest request, HttpServletResponse response)

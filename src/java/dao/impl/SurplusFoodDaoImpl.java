@@ -21,8 +21,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
     @Override
     public void addSurplusFood(SurplusFood surplusfood) {
         String sql = "INSERT INTO SURPLUS_FOOD (NAME, QUANTITY, FOOD_TYPE, EXPIRATION_DATE, PRICE, DISCOUNT_RATE, IS_FOR_DONATION, USER_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, surplusfood.getName());
             stmt.setInt(2, surplusfood.getQuantity());
             stmt.setString(3, surplusfood.getFoodType().toString());
@@ -41,8 +40,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
     public void updateSurplusFood(SurplusFood surplusfood) {
         String sql = "UPDATE SURPLUS_FOOD SET NAME = ?, QUANTITY = ?, PRICE = ?, FOOD_TYPE = ?, EXPIRATION_DATE = ?, "
                 + "DISCOUNT_RATE = ?, IS_FOR_DONATION = ? WHERE ID = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, surplusfood.getName());
             stmt.setInt(2, surplusfood.getQuantity());
             stmt.setDouble(3, surplusfood.getPrice());
@@ -60,8 +58,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
     @Override
     public void deleteSurplusFood(int foodId) {
         String sql = "DELETE FROM SURPLUS_FOOD WHERE ID = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, foodId);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -160,6 +157,33 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
                 surplusfood.setIsForDonation(rs.getBoolean("IS_FOR_DONATION"));
                 surplusfood.setUserID(rs.getInt("USER_ID"));
                 surplusfoods.add(surplusfood);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return surplusfoods;
+    }
+
+    @Override
+    public List<SurplusFood> getSurplusFoodByUserID(int userID) {
+        List<SurplusFood> surplusfoods = new ArrayList<>();
+        String sql = "SELECT * FROM SURPLUS_FOOD WHERE USER_ID = ?";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    SurplusFood surplusfood = new SurplusFood();
+                    surplusfood.setId(rs.getInt("ID"));
+                    surplusfood.setName(rs.getString("NAME"));
+                    surplusfood.setQuantity(rs.getInt("QUANTITY"));
+                    surplusfood.setPrice(rs.getDouble("PRICE"));
+                    surplusfood.setFoodType(FoodType.valueOf(rs.getString("FOOD_TYPE")));
+                    surplusfood.setExpirationDate(rs.getDate("EXPIRATION_DATE"));
+                    surplusfood.setUserID(rs.getInt("USER_ID"));
+                    surplusfood.setDiscountRate(rs.getDouble("DISCOUNT_RATE"));
+                    surplusfood.setIsForDonation(rs.getBoolean("IS_FOR_DONATION"));
+                    surplusfoods.add(surplusfood);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

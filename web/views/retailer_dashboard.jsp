@@ -163,6 +163,13 @@
                             </form>
                         </td>
                         <td>
+                            <form action="unSurplusFood.do" method="post">
+                                <input type="hidden" name="selectOption" value="<%=surplusfood.getId()%>">
+                                <button class="but" type="submit">Unsurplus</button>
+                            </form>
+                            </form>
+                        </td>
+                        <td>
                             <form action="deleteSurplusFood.do" method="post">
                                 <input type="hidden" name="selectOption" value="<%=surplusfood.getId()%>">
                                 <button class="but" type="submit">Delete</button>

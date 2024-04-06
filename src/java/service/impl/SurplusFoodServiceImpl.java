@@ -24,6 +24,11 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
 
     }
 
+    @Override
+    public List<SurplusFood> getSurplusFoodByUser(User user) {
+        return surplusfoodDao.getSurplusFoodByUserID(user.getId());
+    }
+
     public void listSurplusFood(SurplusFood food) {
         List<Subscription> subscriptions = subscriptionDao.getSubscriptionsByPreference(food.getFoodType());
 

@@ -5,12 +5,20 @@
 package service;
 
 import entity.SurplusFood;
+import entity.User;
 import java.util.List;
 
 public interface SurplusFoodService {
-        List<SurplusFood> getAllSurplusFood();
-        void addSurplusFood(SurplusFood surplusfood);
-        void deleteSurplusFood(int surplusfoodID);   
-        SurplusFood getSurplusFoodDetail(int surplusfoodID);
-        void updateSurplusFood(SurplusFood food);
+
+    List<SurplusFood> getSurplusFoodByUser(User user);
+
+    List<SurplusFood> getAllSurplusFood();
+
+    void addSurplusFood(SurplusFood surplusfood);
+
+    void deleteSurplusFood(int surplusfoodID);
+
+    SurplusFood getSurplusFoodDetail(int surplusfoodID);
+
+    void updateSurplusFood(SurplusFood food);
 }
