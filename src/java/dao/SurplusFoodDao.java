@@ -9,7 +9,9 @@ public interface SurplusFoodDao {
 
     void updateSurplusFood(SurplusFood food);
     
-    void updateFoodQuantity(int foodId, int quantity);
+
+    void updateSurplusQuantity(int id, int quantity);
+
 
     void deleteSurplusFood(int foodId);
 

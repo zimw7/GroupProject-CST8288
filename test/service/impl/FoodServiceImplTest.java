@@ -87,7 +87,7 @@ private FoodDao foodDaoStub;
         food.setId(1);
 
         // Call the method to be tested
-        foodService.deleteOneFood(food);
+        foodService.deleteOneFood(1);
 
         // Verify that the method in FoodDao is called with correct argument
         assertEquals(1, ((FoodDaoStub) foodDaoStub).getDeleteFoodCallCount());
