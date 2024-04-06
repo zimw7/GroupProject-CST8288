@@ -21,4 +21,6 @@ public interface SurplusFoodService {
     SurplusFood getSurplusFoodDetail(int surplusfoodID);
 
     void updateSurplusFood(SurplusFood food);
+    
+    void updateSurplusQuantity (int id, int quantity);
 }
