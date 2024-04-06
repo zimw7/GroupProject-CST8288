@@ -4,6 +4,8 @@
     Author     : Zimeng
 --%>
 
+<%@page import="entity.SurplusFood"%>
+<%@page import="java.util.List"%>
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,11 +21,47 @@
     
     <div>
         <h4>Purchase Discounted Items</h4>
-        <form action="consumer_purchase.jsp" method="get">
-            <button type="submit">Purchase</button>
+        <% if (request.getAttribute("successMessage") != null) {%>
+            <p style="color:green;"><%= request.getAttribute("successMessage")%></p>
+            <% }%>
+             
+        <form action= "${pageContext.request.contextPath}/ClientServlet" method="post">
+            <table>
+                <tr>
+                    <th>Select Quantity</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Food Type</th>
+                    <th>Expiration</th>
+                </tr>
+                <% List<SurplusFood> foodList = (List<SurplusFood>) request.getAttribute("surplusfoods");
+                    for (SurplusFood food : foodList) {%>
+                <tr>
+                    <td>
+                        <select id="quantitySelect" name="quantity">
+                            <% int max = food.getQuantity();
+                                for (int i = 0; i <= max; i++) {%>
+                            <option value="<%= i%>"><%= i%></option>
+                            <% }%>
+                        </select>
+                    </td>
+                    <td><%= food.getId()%></td>
+                    <td><%= food.getName()%></td>
+                    <td><%= food.getQuantity()%></td>
+                    <td><%= food.getPrice()%></td>
+                    <td><%= food.getFoodType().name()%></td>
+                    <td><%= food.getExpirationDate()%></td>
+                     <!-- Hidden field inside the loop for each food -->
+                    <td><input type="hidden" name="foodID" value="<%= food.getId() %>"></td>
+                </tr>
+                <% }%>
+            </table>  
+             <input type="submit" value="Submit">
         </form>
-    </div>
-    <br>
+    </div><br>
+    
     
     <div>
         <h2>Subscribe to Surplus Food Alerts</h2>
