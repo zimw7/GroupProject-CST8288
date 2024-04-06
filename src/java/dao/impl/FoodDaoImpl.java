@@ -13,8 +13,7 @@ public class FoodDaoImpl implements FoodDao {
     @Override
     public void addFood(Food food) {
         String sql = "INSERT INTO FOOD (NAME, QUANTITY, PRICE, FOOD_TYPE, EXPIRATION_DATE, USER_ID) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, food.getName());
             stmt.setInt(2, food.getQuantity());
             stmt.setDouble(3, food.getPrice());
@@ -30,8 +29,7 @@ public class FoodDaoImpl implements FoodDao {
     @Override
     public void updateFood(Food food) {
         String sql = "UPDATE FOOD SET NAME = ?, QUANTITY = ?, PRICE = ?, FOOD_TYPE = ?, EXPIRATION_DATE = ? WHERE ID = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, food.getName());
             stmt.setInt(2, food.getQuantity());
             stmt.setDouble(3, food.getPrice());
@@ -47,8 +45,7 @@ public class FoodDaoImpl implements FoodDao {
     @Override
     public void deleteFood(int foodId) {
         String sql = "DELETE FROM FOOD WHERE ID = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, foodId);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -59,8 +56,7 @@ public class FoodDaoImpl implements FoodDao {
     @Override
     public Food getFoodById(int foodId) {
         String sql = "SELECT * FROM FOOD WHERE ID = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, foodId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -85,9 +81,7 @@ public class FoodDaoImpl implements FoodDao {
     public List<Food> getAllFoods() {
         List<Food> foods = new ArrayList<>();
         String sql = "SELECT * FROM FOOD ORDER BY ID";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Food food = new Food();
                 food.setId(rs.getInt("ID"));
@@ -109,8 +103,7 @@ public class FoodDaoImpl implements FoodDao {
     public List<Food> getFoodByUserID(int userID) {
         List<Food> foods = new ArrayList<>();
         String sql = "SELECT * FROM FOOD WHERE USER_ID = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userID);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -130,6 +123,5 @@ public class FoodDaoImpl implements FoodDao {
         }
         return foods;
     }
-    
-    
+
 }

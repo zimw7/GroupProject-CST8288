@@ -40,8 +40,8 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public void deleteOneFood(Food food) {
-        foodDao.deleteFood(food.getId());
+    public void deleteOneFood(int foodID) {
+        foodDao.deleteFood(foodID);
     }
     
     
