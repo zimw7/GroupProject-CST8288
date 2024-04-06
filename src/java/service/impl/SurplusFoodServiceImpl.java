@@ -72,9 +72,12 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     }
     
     @Override
-    public void updateFoodQuantity(int foodID, int quantity) {
-        surplusfoodDao.updateFoodQuantity(foodID, quantity);
+
+    public void updateSurplusQuantity (int id, int quantity){
+        surplusfoodDao.updateSurplusQuantity ( id, quantity);
     }
+
+
     
     @Override
     public boolean claimSurplusFood(int foodId, int quantity) {
@@ -82,7 +85,7 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
         if (food != null && food.getQuantity() >= quantity) { 
             int newQuantity = food.getQuantity() - quantity;
             if (newQuantity > 0) {
-                surplusfoodDao.updateFoodQuantity(foodId, newQuantity);
+                surplusfoodDao.updateSurplusQuantity(foodId, newQuantity);
             } else {
                 surplusfoodDao.deleteSurplusFood(foodId); 
             }
@@ -94,6 +97,7 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     @Override
     public List<SurplusFood> getSurplusFoodsForDonation() {
          return surplusfoodDao.getSurplusFoodsForDonation();
+
     }
 
     

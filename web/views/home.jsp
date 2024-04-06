@@ -22,7 +22,7 @@
                     response.sendRedirect("../RetailerServlet");
                     break;
                 case CUSTOMER:
-                    response.sendRedirect("consumer_dashboard.jsp"); 
+                    response.sendRedirect("../ClientServlet"); 
                     break;
                 case CHARITY:
                     response.sendRedirect("../ShowDonationFoodsServlet");

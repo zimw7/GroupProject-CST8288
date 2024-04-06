@@ -196,18 +196,19 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         }
         return surplusfoods;
     }
-
+    
     @Override
-    public void updateFoodQuantity(int foodId, int quantity){
+    public void updateSurplusQuantity(int id, int quantity){
         String sql = "UPDATE SURPLUS_FOOD SET QUANTITY = ? WHERE ID = ?";
-    try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {   
             stmt.setInt(1, quantity);
-            stmt.setInt(2, foodId);
+            stmt.setInt(2, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
 
 }
