@@ -48,7 +48,7 @@ public class SubscribeServlet extends HttpServlet {
             } else {
                 request.setAttribute("successMessage", "Subscription added successfully!");
             }
-            request.getRequestDispatcher("/views/consumer_subscription.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/consumer_dashboard.jsp").forward(request, response);
 
 
 
