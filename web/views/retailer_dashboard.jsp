@@ -13,7 +13,7 @@
     <body>
         <h2>&#129386; FoodSaver &#129386;</h2><br>
         <h2>Welcome, <%= ((User) session.getAttribute("user")).getUserName()%>!</h2>
-        <h3>Retailer Dashboard</h3>
+        <h2 style="color:darkblue;"><i>Consumer Dashboard</i></h2>
 
         <div>
             <h4>Manage Inventory</h4>

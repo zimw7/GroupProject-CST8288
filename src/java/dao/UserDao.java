@@ -2,6 +2,7 @@ package dao;
 
 import entity.User;
 import java.util.List;
+import util.UserType;
 
 public interface UserDao {
     void addUser(User user);
@@ -11,4 +12,5 @@ public interface UserDao {
     User getUserById(int userId);
     User getUserByUsername(String username);
     List<User> getAllUsers();
+    List<User> getAllUsersByType(UserType userType);
 }

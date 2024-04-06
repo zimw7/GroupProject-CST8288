@@ -78,4 +78,26 @@ public class UserDaoImpl implements UserDao {
     
     @Override
     public List<User> getAllUsers() { return new ArrayList<>();  }
+    
+    @Override
+    public List<User> getAllUsersByType(UserType userType) {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE user_type = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, userType.toString());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("ID"));
+                user.setUserName(rs.getString("USER_NAME"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    
 }

@@ -6,6 +6,7 @@ import entity.User;
 import service.UserService;
 import java.util.List;
 import util.LoginResult;
+import util.UserType;
 
 public class UserServiceImpl implements UserService {
 
@@ -48,4 +49,10 @@ public class UserServiceImpl implements UserService {
     public User getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }
+    
+    @Override
+    public List<User> getAllRetailers() {
+        return userDao.getAllUsersByType(UserType.RETAIL);
+    }
+
 }
