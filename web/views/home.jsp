@@ -25,7 +25,7 @@
                     response.sendRedirect("consumer_dashboard.jsp"); 
                     break;
                 case CHARITY:
-                    response.sendRedirect("charity_dashboard.jsp");
+                    response.sendRedirect("../ShowDonationFoodsServlet");
                     break;
                 default:
                     out.println("<p>Unrecognized user type. Please <a href=\"../index.jsp\">log in</a> again.</p>");

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package service;
 
 import entity.SurplusFood;
@@ -9,16 +5,21 @@ import entity.User;
 import java.util.List;
 
 public interface SurplusFoodService {
+  
+        List<SurplusFood> getAllSurplusFood();
+        void addSurplusFood(SurplusFood surplusfood);
+        void deleteSurplusFood(SurplusFood surplusfood); 
+        void deleteSurplusFood(int foodId);
+        void updateFoodQuantity(int foodID, int quantity);
+        boolean claimSurplusFood(int foodId, int quantity); 
+        List<SurplusFood> getSurplusFoodsForDonation();
+  
+        List<SurplusFood> getSurplusFoodByUser(User user);
+        void deleteSurplusFood(int surplusfoodID);
+        SurplusFood getSurplusFoodDetail(int surplusfoodID);
+        void updateSurplusFood(SurplusFood food);
 
-    List<SurplusFood> getSurplusFoodByUser(User user);
+  
+  
 
-    List<SurplusFood> getAllSurplusFood();
-
-    void addSurplusFood(SurplusFood surplusfood);
-
-    void deleteSurplusFood(int surplusfoodID);
-
-    SurplusFood getSurplusFoodDetail(int surplusfoodID);
-
-    void updateSurplusFood(SurplusFood food);
 }
