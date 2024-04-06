@@ -22,41 +22,35 @@
 
         <% Food food = (Food) session.getAttribute("foodDetail");%>
 
-        <form action="updateOneFood.do" method="post">
+        <form action="updateFood.do" method="post">
             ID: <input type="text" name="id" readonly value="<%= food.getId()%>" > <br><br>
             Name: <input type="text" name="name" required value="<%= food.getName()%>"><br><br>
             Quantity: <input type="number" name="quantity" required value="<%= food.getQuantity()%>"><br><br>
             Price: <input type="number" name="price" step=0.01 required value="<%= food.getPrice()%>"><br><br>
 
-            <label>Food Type:</label><br><br>
-            <input type="radio" id="dairy" name="foodType" value="DAIRY" required
-                   <% if (food.getFoodType() == FoodType.DAIRY) {
+            Food Type:
+            <select name="foodType" id="foodType">
+                <option value="DAIRY"<% if (food.getFoodType() == FoodType.DAIRY) {
                    %>
-                   checked
+                   selected
                    <% } %>
-                   >
-            <label for="dairy">DAIRY</label><br><br>
-            <input type="radio" id="perishable" name="foodType" value="PERISHABLE" required
-                   <% if (food.getFoodType() == FoodType.PERISHABLE) {
+                   > DAIRY </option>
+                <option value="PERISHABLE"<% if (food.getFoodType() == FoodType.PERISHABLE) {
                    %>
-                   checked
+                   selected
                    <% } %>
-                   >
-            <label for="perishable">PERISHABLE</label><br><br>
-            <input type="radio" id="carbohydrate" name="foodType" value="CARBOHYDRATE" required
-                   <% if (food.getFoodType() == FoodType.CARBOHYDRATE) {
+                   > PERISHABLE </option>
+                <option value="CARBOHYDRATE"<% if (food.getFoodType() == FoodType.CARBOHYDRATE) {
                    %>
-                   checked
+                   selected
                    <% } %>
-                   >
-            <label for="carbohydrate">CARBOHYDRATE</label><br><br>
-            <input type="radio" id="drink" name="foodType" value="DRINK" required
-                   <% if (food.getFoodType() == FoodType.DRINK) {
+                   > CARBOHYDRATE </option>
+                <option value="DRINK"<% if (food.getFoodType() == FoodType.DRINK) {
                    %>
-                   checked
+                   selected
                    <% } %>
-                   >
-            <label for="drink">DRINK</label><br><br>
+                   > DRINK </option>
+            </select><BR><BR>
             <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
             <%
                 DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -72,6 +66,6 @@
 
             <button class="but" type="submit">Update</button>
         </form><br>
-        <p>Back to dashboard &#8594; <a href="${pageContext.request.contextPath}/FoodServlet">DashBoard</a></p>
+        <p>Back to dashboard &#8594; <a href="${pageContext.request.contextPath}/RetailerServlet">DashBoard</a></p>
     </body>
 </html>

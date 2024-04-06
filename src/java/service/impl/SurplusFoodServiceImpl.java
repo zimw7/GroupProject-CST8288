@@ -24,6 +24,11 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
 
     }
 
+    @Override
+    public List<SurplusFood> getSurplusFoodByUser(User user) {
+        return surplusfoodDao.getSurplusFoodByUserID(user.getId());
+    }
+
     public void listSurplusFood(SurplusFood food) {
         List<Subscription> subscriptions = subscriptionDao.getSubscriptionsByPreference(food.getFoodType());
 
@@ -50,13 +55,18 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     }
     
     @Override
-    public void updateFoodQuantity(int foodID, int quantity){
-        surplusfoodDao.updateFoodQuantity(foodID, quantity);
-        
+    public void deleteSurplusFood(int surplusfoodID) {
+       surplusfoodDao.deleteSurplusFood(surplusfoodID);
     }
+
     @Override
-    public void deleteSurplusFood(SurplusFood surplusfood) {
-       surplusfoodDao.deleteSurplusFood(surplusfood.getId());
+    public SurplusFood getSurplusFoodDetail(int surplusfoodID) {
+        return surplusfoodDao.getSurplusFoodById(surplusfoodID);
+    }
+
+    @Override
+    public void updateSurplusFood(SurplusFood surplusfood) {
+        surplusfoodDao.updateSurplusFood(surplusfood);
     }
 
 }

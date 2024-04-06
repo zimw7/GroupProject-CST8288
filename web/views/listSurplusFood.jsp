@@ -87,6 +87,6 @@
 
             <button class="but" type="submit">List As Surplus Food</button>
         </form><br>
-        <p>Back to dashboard &#8594; <a href="${pageContext.request.contextPath}/FoodServlet">DashBoard</a></p>
+        <p>Back to dashboard &#8594; <a href="${pageContext.request.contextPath}/RetailerServlet">DashBoard</a></p>
     </body>
 </html>
