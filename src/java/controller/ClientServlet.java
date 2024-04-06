@@ -40,34 +40,13 @@ public class ClientServlet extends HttpServlet {
 
         List<SurplusFood> surplusfoods = null;     
         surplusfoods = surplusFoodService.getAllSurplusFood();
-        request.setAttribute("surplusfoods", surplusfoods);
+        request.setAttribute("surplusFood", surplusfoods);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/consumer_dashboard.jsp");
         dispatcher.forward(request, response);
     }
     
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-     doGet(request,response);
-     
-     purchaseFood(request, response);
     
-    }
-    
-    private void purchaseFood(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        int foodID = Integer.parseInt(request.getParameter("foodID"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        surplusFoodService.updateSurplusQuantity(foodID, quantity);
-        
-        request.setAttribute("successMessage", "Checked out successful!");
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/consumer_dashboard.jsp");
-        dispatcher.forward(request, response);
-        
-    }
         /**
      * Returns a short description of the servlet.
      *

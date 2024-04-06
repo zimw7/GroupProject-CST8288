@@ -24,42 +24,40 @@
         <% if (request.getAttribute("successMessage") != null) {%>
             <p style="color:green;"><%= request.getAttribute("successMessage")%></p>
             <% }%>
-             
-        <form action= "${pageContext.request.contextPath}/ClientServlet" method="post">
+        <% if (request.getAttribute("errorMessage") != null) { %>
+            <p style="color:red;"><%= request.getAttribute("errorMessage") %></p>
+        <% } %>     
+        
             <table>
                 <tr>
                     <th>Select Quantity</th>
-                    <th>ID</th>
+<!--                    <th>ID</th>-->
                     <th>Name</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Food Type</th>
                     <th>Expiration</th>
                 </tr>
-                <% List<SurplusFood> foodList = (List<SurplusFood>) request.getAttribute("surplusfoods");
+                <% List<SurplusFood> foodList = (List<SurplusFood>) request.getAttribute("surplusFood");
                     for (SurplusFood food : foodList) {%>
                 <tr>
                     <td>
-                        <select id="quantitySelect" name="quantity">
-                            <% int max = food.getQuantity();
-                                for (int i = 0; i <= max; i++) {%>
-                            <option value="<%= i%>"><%= i%></option>
-                            <% }%>
-                        </select>
+                        <form action= "PurchaseSurplusServlet" method="post">
+                        <input type="hidden" name="foodID" value="<%= food.getId() %>">
+                        <input type="number" name="quantity" value="0" min="0" max="<%= food.getQuantity() %>">
+                        <button type="submit">Check out</button>
+                        </form>
                     </td>
-                    <td><%= food.getId()%></td>
+                    
+<!--                    <td><%= food.getId()%></td>-->
                     <td><%= food.getName()%></td>
                     <td><%= food.getQuantity()%></td>
                     <td><%= food.getPrice()%></td>
                     <td><%= food.getFoodType().name()%></td>
-                    <td><%= food.getExpirationDate()%></td>
-                     <!-- Hidden field inside the loop for each food -->
-                    <td><input type="hidden" name="foodID" value="<%= food.getId() %>"></td>
+                    <td><%= food.getExpirationDate()%></td
                 </tr>
                 <% }%>
             </table>  
-             <input type="submit" value="Submit">
-        </form>
     </div><br>
     
     

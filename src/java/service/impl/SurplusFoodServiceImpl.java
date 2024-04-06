@@ -72,9 +72,10 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     }
     
     @Override
-
     public void updateSurplusQuantity (int id, int quantity){
-        surplusfoodDao.updateSurplusQuantity ( id, quantity);
+        SurplusFood food = surplusfoodDao.getSurplusFoodById(id);
+        int newQuantity = food.getQuantity() - quantity;
+        surplusfoodDao.updateSurplusQuantity ( id, newQuantity);
     }
 
 
