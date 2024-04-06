@@ -17,6 +17,7 @@
     <h2>&#129386; FoodSaver &#129386;</h2><br>
     <h2>Welcome, <%= ((User)session.getAttribute("user")).getUserName() %>!</h2>
     <h3>Consumer Dashboard</h3>
+
     <div>
         <h4>Purchase Discounted Items</h4>
         <% if (request.getAttribute("successMessage") != null) {%>
@@ -71,6 +72,5 @@
     
     <p><a href="index">&#128075; Log out </a></p>
     
-
 </body> 
 </html>

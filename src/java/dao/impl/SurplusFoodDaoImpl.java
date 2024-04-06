@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao.impl;
 
-import entity.Food;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +50,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         }
     }
 
+    
     @Override
     public void deleteSurplusFood(int foodId) {
         String sql = "DELETE FROM SURPLUS_FOOD WHERE ID = ?";
@@ -65,6 +61,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
             e.printStackTrace();
         }
     }
+    
 
     @Override
     public SurplusFood getSurplusFoodById(int foodId) {
@@ -133,10 +130,19 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
                 surplusfood.setIsForDonation(rs.getBoolean("IS_FOR_DONATION"));
                 surplusfood.setUserID(rs.getInt("USER_ID"));
                 surplusfoods.add(surplusfood);
+                
+                System.out.println("Retrieved food for donation: " + surplusfood.getName());
+           
             }
         } catch (SQLException e) {
+            
+             System.err.println("Error when retrieving foods for donation: " + e.getMessage());
+           
+             
             e.printStackTrace();
         }
+        
+        
         return surplusfoods;
     }
 
@@ -197,6 +203,19 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {   
             stmt.setInt(1, quantity);
             stmt.setInt(2, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateFoodQuantity(int foodId, int quantity){
+        String sql = "UPDATE SURPLUS_FOOD SET QUANTITY = ? WHERE ID = ?";
+    try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, quantity);
+            stmt.setInt(2, foodId);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

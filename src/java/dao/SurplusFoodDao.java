@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package dao;
 
 import entity.SurplusFood;
@@ -13,7 +9,9 @@ public interface SurplusFoodDao {
 
     void updateSurplusFood(SurplusFood food);
     
+
     void updateSurplusQuantity(int id, int quantity);
+
 
     void deleteSurplusFood(int foodId);
 
