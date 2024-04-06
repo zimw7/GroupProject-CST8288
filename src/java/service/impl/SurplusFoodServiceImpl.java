@@ -11,6 +11,7 @@ import java.util.List;
 import service.SurplusFoodService;
 import util.ContactType;
 
+
 public class SurplusFoodServiceImpl implements SurplusFoodService {
 
     private NotificationServiceImpl notificationService = null;
@@ -21,9 +22,9 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
         this.notificationService = new NotificationServiceImpl();
         this.subscriptionDao = new SubscriptionDaoImpl();
         surplusfoodDao = new SurplusFoodDaoImpl();
-
     }
 
+     
     public void listSurplusFood(SurplusFood food) {
         List<Subscription> subscriptions = subscriptionDao.getSubscriptionsByPreference(food.getFoodType());
 
@@ -57,6 +58,32 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     @Override
     public void deleteSurplusFood(SurplusFood surplusfood) {
        surplusfoodDao.deleteSurplusFood(surplusfood.getId());
+    }
+    
+    
+    @Override
+    public void deleteSurplusFood(int foodId) {
+        surplusfoodDao.deleteSurplusFood(foodId); 
+    }
+    
+    @Override
+    public boolean claimSurplusFood(int foodId, int quantity) {
+        SurplusFood food = surplusfoodDao.getSurplusFoodById(foodId);
+        if (food != null && food.getQuantity() >= quantity) { 
+            int newQuantity = food.getQuantity() - quantity;
+            if (newQuantity > 0) {
+                surplusfoodDao.updateFoodQuantity(foodId, newQuantity);
+            } else {
+                surplusfoodDao.deleteSurplusFood(foodId); 
+            }
+            return true; 
+        }
+        return false; 
+    }
+
+    @Override
+    public List<SurplusFood> getSurplusFoodsForDonation() {
+         return surplusfoodDao.getSurplusFoodsForDonation();
     }
 
 }

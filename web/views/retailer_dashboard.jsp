@@ -96,9 +96,11 @@
                     <% }%>
                 </tbody>
             </table>
-        </div>
+        </div><br>
 
-
-        <p><a href="index">&#128075; Log out </a></p>
+        <form action="${pageContext.request.contextPath}/logout" method="post">
+        <button type="submit">&#128075; Log out</button>
+         </form>
+        
     </body>
 </html>
