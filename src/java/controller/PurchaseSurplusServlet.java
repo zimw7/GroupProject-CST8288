@@ -37,10 +37,10 @@ public class PurchaseSurplusServlet extends HttpServlet {
          
         try{
             surplusFoodService.updateSurplusQuantity(foodID, quantity);
-            
-            request.setAttribute("successMessage", "Check out successful!");
+
+            request.setAttribute("successCheckout", "Check out successful!");
         } catch (Exception e) {
-            request.setAttribute("errorMessage", "Check out unsuccessful, please try again.");
+            request.setAttribute("errorCheckout", "Check out unsuccessful, please try again.");
         }
 
         List<SurplusFood> foodList = surplusFoodService.getAllSurplusFood();

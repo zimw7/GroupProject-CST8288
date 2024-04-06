@@ -21,11 +21,11 @@
     
     <div>
         <h4>Purchase Discounted Items</h4>
-        <% if (request.getAttribute("successMessage") != null) {%>
-            <p style="color:green;"><%= request.getAttribute("successMessage")%></p>
+        <% if (request.getAttribute("successCheckout") != null) {%>
+            <p style="color:green;"><%= request.getAttribute("successCheckout")%></p>
             <% }%>
-        <% if (request.getAttribute("errorMessage") != null) { %>
-            <p style="color:red;"><%= request.getAttribute("errorMessage") %></p>
+        <% if (request.getAttribute("errorCheckout") != null) { %>
+            <p style="color:red;"><%= request.getAttribute("errorCheckout") %></p>
         <% } %>     
         
             <table>
