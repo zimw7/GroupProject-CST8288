@@ -50,6 +50,7 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         }
     }
 
+    
     @Override
     public void deleteSurplusFood(int foodId) {
         String sql = "DELETE FROM SURPLUS_FOOD WHERE ID = ?";
@@ -194,6 +195,19 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
             e.printStackTrace();
         }
         return surplusfoods;
+    }
+
+    @Override
+    public void updateFoodQuantity(int foodId, int quantity){
+        String sql = "UPDATE SURPLUS_FOOD SET QUANTITY = ? WHERE ID = ?";
+    try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, quantity);
+            stmt.setInt(2, foodId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
