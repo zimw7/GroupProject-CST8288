@@ -67,8 +67,7 @@
             <button type="submit" style="font-size: 15px; padding: 8px 16px;">&#128276; Subscribe to Alerts &#128276;</button>
         </form>
 
-    </div><br><br>
-
+    </div><br>
     
     <div>
         <form action="${pageContext.request.contextPath}/logout" method="post">
