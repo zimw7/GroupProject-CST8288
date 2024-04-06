@@ -209,17 +209,6 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         }
     }
 
-    @Override
-    public void updateFoodQuantity(int foodId, int quantity){
-        String sql = "UPDATE SURPLUS_FOOD SET QUANTITY = ? WHERE ID = ?";
-    try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, quantity);
-            stmt.setInt(2, foodId);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }

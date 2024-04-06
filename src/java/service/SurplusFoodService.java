@@ -8,7 +8,7 @@ public interface SurplusFoodService {
     List<SurplusFood> getAllSurplusFood();
     void addSurplusFood(SurplusFood surplusfood);
     void deleteSurplusFood(int foodId); 
-    void updateFoodQuantity(int foodID, int quantity); 
+     
     boolean claimSurplusFood(int foodId, int quantity);
     List<SurplusFood> getSurplusFoodsForDonation();
     List<SurplusFood> getSurplusFoodByUser(User user);
