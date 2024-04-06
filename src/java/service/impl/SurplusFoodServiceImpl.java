@@ -53,7 +53,7 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     public void addSurplusFood(SurplusFood surplusfood) {
         surplusfoodDao.addSurplusFood(surplusfood);
     }
-
+    
     @Override
     public void deleteSurplusFood(int surplusfoodID) {
        surplusfoodDao.deleteSurplusFood(surplusfoodID);

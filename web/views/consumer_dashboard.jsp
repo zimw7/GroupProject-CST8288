@@ -18,7 +18,8 @@
     <br>
     <div>
         <h4>Purchase Discounted Items</h4>
-        
+        <p>&#128071; &#128071; &#128071;</p>
+        <a href="consumer_purchase.jsp">Start Grocery Now</a>
     </div><br>
     
     <div>
