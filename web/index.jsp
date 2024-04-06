@@ -24,7 +24,7 @@
             
             <input type="submit" value="Login">
         </form><br><br>
-            <p>Not a user? &#8594; <a href="${pageContext.request.contextPath}/views/register.jsp">Register</a></p>
+            <p>&#129488; Not a user? &nbsp;  &#128073; <a href="${pageContext.request.contextPath}/views/register.jsp">Register</a></p>
          
 
             

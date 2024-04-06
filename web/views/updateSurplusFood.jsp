@@ -78,6 +78,6 @@
 
             <button class="but" type="submit">Update</button>
         </form><br>
-        <p>Back to dashboard &#8594; <a href="${pageContext.request.contextPath}/RetailerServlet">DashBoard</a></p>
+        <p>Back to &#128073; <a href="${pageContext.request.contextPath}/RetailerServlet">DashBoard</a></p>
     </body>
 </html>
