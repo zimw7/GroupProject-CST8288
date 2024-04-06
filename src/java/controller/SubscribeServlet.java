@@ -5,9 +5,13 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import entity.Subscription;
+import entity.SurplusFood;
 import entity.User;
+import java.util.List;
 import service.SubscriptionService;
+import service.SurplusFoodService;
 import service.impl.SubscriptionServiceImpl;
+import service.impl.SurplusFoodServiceImpl;
 import util.ContactType;
 import util.PreferenceType;
 import util.SubscriptionResult;
@@ -16,10 +20,12 @@ import util.SubscriptionResult;
 @WebServlet(name = "SubscribeServlet", urlPatterns = {"/SubscribeServlet"})
 public class SubscribeServlet extends HttpServlet {
     private SubscriptionService subscriptionService; 
+    private SurplusFoodService surplusFoodService;
 
     @Override
     public void init() {
         this.subscriptionService = new SubscriptionServiceImpl(); 
+        this.surplusFoodService = new SurplusFoodServiceImpl();
     }
 
     @Override
@@ -48,6 +54,10 @@ public class SubscribeServlet extends HttpServlet {
             } else {
                 request.setAttribute("successMessage", "Subscription added successfully!");
             }
+            
+            List<SurplusFood> surplusfoods = surplusFoodService.getAllSurplusFood();
+            request.setAttribute("surplusfoods", surplusfoods);
+            
             request.getRequestDispatcher("/views/consumer_dashboard.jsp").forward(request, response);
 
 
