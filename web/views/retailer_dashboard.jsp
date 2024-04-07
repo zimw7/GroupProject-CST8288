@@ -130,6 +130,7 @@
                         <th>Expiration</th>
                         <th>Discount_rate</th>
                         <th>Donation</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -155,36 +156,55 @@
                                 <% }%>
                                 />
                         </td>
-                        <td><%= surplusfood.isIsForDonation()%></td>
                         <td>
                             <form action="getSurplusFoodDetail.do" method="post">
                                 <input type="hidden" name="selectOption" value="<%=surplusfood.getId()%>">
                                 <button class="but" type="submit">Update</button>
                             </form>
-                        </td>
-                        <td>
+
                             <form action="unSurplusFood.do" method="post">
                                 <input type="hidden" name="selectOption" value="<%=surplusfood.getId()%>">
                                 <button class="but" type="submit">Unsurplus</button>
                             </form>
-                            </form>
-                        </td>
-                        <td>
+
                             <form action="deleteSurplusFood.do" method="post">
                                 <input type="hidden" name="selectOption" value="<%=surplusfood.getId()%>">
                                 <button class="but" type="submit">Delete</button>
                             </form>
-                            </form>
                         </td>
+                        <td>
+
+                        </td>
+
                     </tr>
                     <% }%>
                 </tbody>
             </table>
-        </div><br>
+            <br>
+            <form action= "report.do" method="post">
+                <input type="hidden" name="retailer" value="<%= ((User) session.getAttribute("user")).getUserName()%>">
 
+                <% for (SurplusFood surplusfood : surplusfoods) {%>
+                <input type="hidden" name="selectOption" value="<%= surplusfood.getId()%>">
+                <% } %>
+                <button type="submit">Save All Surplus Food Reports</button>
+            </form>    
+
+            <% if (request.getAttribute("errorReportMessage") != null) {%>
+            <p style="color:red;"><%= request.getAttribute("errorReportMessage")%></p>
+            <% } %>
+
+            <% if (request.getAttribute("successReportMessage") != null) {%>
+            <p style="color:green;"><%= request.getAttribute("successReportMessage")%></p>
+            <% }%>
+            <% if (request.getAttribute("locationMessage") != null) {%>
+            <p style="color:green;"><%= request.getAttribute("locationMessage")%></p>
+            <% }%>
+        </div>
+        <br>
         <form action="${pageContext.request.contextPath}/logout" method="post">
-        <button type="submit">&#128075; Log out</button>
-         </form>
-        
+            <button type="submit">&#128075; Log out</button>
+        </form>
+
     </body>
 </html>
