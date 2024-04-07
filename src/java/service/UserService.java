@@ -9,4 +9,5 @@ public interface UserService {
     boolean register(User user);
     List<User> getAllUsers();
     User getUserByUsername(String username);
+    List<User> getAllRetailers();
 }

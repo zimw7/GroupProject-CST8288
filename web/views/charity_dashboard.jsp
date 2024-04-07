@@ -15,10 +15,10 @@
 <body>
     <h2>&#129386; FoodSaver &#129386;</h2><br>
     <h2>Welcome, <%= ((User)session.getAttribute("user")).getUserName() %>!</h2>
-    <h3>Charitable Organization Dashboard</h3>
+    <h2 style="color:darkblue;"><i>Charity Dashboard</i></h2>
     
     <div>
-        <h4>Request Food Donations</h4>
+        <h3>Request Food Donations</h3>
         
         <table border="1">
             <tr>

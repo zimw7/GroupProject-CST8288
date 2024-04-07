@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 
@@ -19,10 +15,7 @@ import service.SurplusFoodService;
 
 import service.impl.SurplusFoodServiceImpl;
 
-/**
- *
- * @author liuma
- */
+
 @WebServlet(name = "ClientServlet", urlPatterns = {"/ClientServlet"})
 public class ClientServlet extends HttpServlet {
     private SurplusFoodService surplusFoodService = null;

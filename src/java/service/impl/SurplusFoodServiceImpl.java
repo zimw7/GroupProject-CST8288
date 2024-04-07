@@ -100,8 +100,6 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
          return surplusfoodDao.getSurplusFoodsForDonation();
 
     }
-
-    
     
     
 }

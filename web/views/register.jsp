@@ -40,9 +40,9 @@
             <label for="charity">Charity</label><br><br>
             
             <input type="submit" value="Register"><br>
-        </form><br>
+        </form><br><br>
         
-        <p>Back to login &#8594; <a href="${pageContext.request.contextPath}/index.jsp">Login</a></p>
+        <p>&#127881; Back to &nbsp; &#128073; <a href="${pageContext.request.contextPath}/index.jsp">Login</a></p>
          
             
     </body>

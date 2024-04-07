@@ -13,10 +13,10 @@
     <body>
         <h2>&#129386; FoodSaver &#129386;</h2><br>
         <h2>Welcome, <%= ((User) session.getAttribute("user")).getUserName()%>!</h2>
-        <h3>Retailer Dashboard</h3>
+        <h2 style="color:darkblue;"><i>Retailer Dashboard</i></h2>
 
         <div>
-            <h4>Manage Inventory</h4>
+            <h3>Manage Inventory</h3>
             <% if (request.getAttribute("errorMessage") != null) {%>
             <p style="color:red;"><%= request.getAttribute("errorMessage")%></p>
             <% } %>
@@ -118,7 +118,7 @@
         </div>
 
         <div>
-            <h4>List Surplus Food Items</h4>
+            <h3>List Surplus Food Items</h3>
             <table border="1">
                 <thead>
                     <tr>
