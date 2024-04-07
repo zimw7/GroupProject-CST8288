@@ -36,6 +36,7 @@
                         <th>price</th>
                         <th>Food type</th>
                         <th>Expiration</th>
+                        <th colspan="3">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,7 +131,7 @@
                         <th>Expiration</th>
                         <th>Discount_rate</th>
                         <th>Donation</th>
-                        <th>Action</th>
+                        <th colspan="3">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -161,21 +162,19 @@
                                 <input type="hidden" name="selectOption" value="<%=surplusfood.getId()%>">
                                 <button class="but" type="submit">Update</button>
                             </form>
-
+                        </td>
+                        <td>
                             <form action="unSurplusFood.do" method="post">
                                 <input type="hidden" name="selectOption" value="<%=surplusfood.getId()%>">
                                 <button class="but" type="submit">Unsurplus</button>
                             </form>
-
+                        </td>
+                        <td>
                             <form action="deleteSurplusFood.do" method="post">
                                 <input type="hidden" name="selectOption" value="<%=surplusfood.getId()%>">
                                 <button class="but" type="submit">Delete</button>
                             </form>
                         </td>
-                        <td>
-
-                        </td>
-
                     </tr>
                     <% }%>
                 </tbody>

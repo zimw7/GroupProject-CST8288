@@ -65,7 +65,7 @@
             </script>
 
 
-            Discount Rate: <input type="number" name="discountRate" step="0.01" value="<%= surplusfood.getDiscountRate() %>"> <br><br>
+            Discount Rate: <input type="number" name="discountRate" step="0.01" min="0" max="1" value="<%= surplusfood.getDiscountRate() %>"> <br><br>
             <input
                 type="checkbox"
                 id="donation"

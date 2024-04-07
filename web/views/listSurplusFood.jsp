@@ -77,7 +77,7 @@
             </tr>
         </table><br><br>
         <form action="listOneSurplusFood.do" method="post">
-            Discount Rate: <input type="number" name="discountRate" step="0.01" > <br><br>
+            Discount Rate: <input type="number" name="discountRate" step="0.01" min="0" max="1" > <br><br>
             <input
                 type="checkbox"
                 id="donation"

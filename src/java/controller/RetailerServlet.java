@@ -65,6 +65,8 @@ public class RetailerServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/retailer_dashboard.jsp");
         dispatcher.forward(request, response);
+        
+        
     }
 
     /**
