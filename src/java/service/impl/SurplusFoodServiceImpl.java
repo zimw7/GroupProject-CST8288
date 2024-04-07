@@ -2,8 +2,10 @@ package service.impl;
 
 import dao.SubscriptionDao;
 import dao.SurplusFoodDao;
+import dao.UserDao;
 import dao.impl.SubscriptionDaoImpl;
 import dao.impl.SurplusFoodDaoImpl;
+import dao.impl.UserDaoImpl;
 import entity.Subscription;
 import entity.SurplusFood;
 import entity.User;
@@ -17,10 +19,12 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     private NotificationServiceImpl notificationService = null;
     private SubscriptionDao subscriptionDao = null;
     private SurplusFoodDao surplusfoodDao = null;
+    private UserDao userDao = null;
 
     public SurplusFoodServiceImpl() {
         this.notificationService = new NotificationServiceImpl();
         this.subscriptionDao = new SubscriptionDaoImpl();
+        this.userDao = new UserDaoImpl();
         surplusfoodDao = new SurplusFoodDaoImpl();
     }
 
@@ -35,7 +39,8 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
         List<Subscription> subscriptions = subscriptionDao.getSubscriptionsByPreference(food.getFoodType());
 
         for (Subscription subscription : subscriptions) {
-            User user = subscription.getUser();
+            int userID = subscription.getUserID();
+            User user = userDao.getUserById(userID);
             String message = "Available surplus food: " + food.getName();
 
             notificationService.sendNotification(

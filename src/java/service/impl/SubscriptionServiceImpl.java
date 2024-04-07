@@ -23,13 +23,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public SubscriptionResult subscribe(Subscription subscription) {
         List<Subscription> existingSubscriptions = subscriptionDao.findSubscriptionsByUserAndPreference(
-                subscription.getUser().getId(), subscription.getPreferenceType().toString(), subscription.getRetailerUsername());
+                subscription.getUserID(), subscription.getPreferenceType().toString(), subscription.getRetailerUsername());
 
         if (!existingSubscriptions.isEmpty()) {
             return SubscriptionResult.ALREADY_SUBSCRIBED;
         } else {
             subscriptionDao.addSubscription(subscription);
-            userDao.updateUserIsSubscribed(subscription.getUser().getId(), true);
+            userDao.updateUserIsSubscribed(subscription.getUserID(), true);
             return SubscriptionResult.SUCCESS;
         }
     }
@@ -38,4 +38,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public void unsubscribe(int subscriptionId) {
         subscriptionDao.deleteSubscription(subscriptionId);
     }
+
+    @Override
+    public List<Subscription> getAllSubscriptions() {
+        return subscriptionDao.getAllSubscription();
+    }
+    
+    
 }

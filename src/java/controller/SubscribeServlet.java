@@ -58,7 +58,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         }
 
         Subscription subscription = new Subscription();
-        subscription.setUser(user);
+        subscription.setUserID(user.getId());
         subscription.setPreferenceType(PreferenceType.valueOf(preferenceType));
         subscription.setContactType(ContactType.valueOf(contactType));
         subscription.setRetailerUsername(retailerUsername);

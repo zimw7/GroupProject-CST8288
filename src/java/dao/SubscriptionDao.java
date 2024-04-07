@@ -9,5 +9,5 @@ public interface SubscriptionDao {
     void deleteSubscription(int subscriptionId);
     List<Subscription> getSubscriptionsByPreference(FoodType foodType); 
     List<Subscription> findSubscriptionsByUserAndPreference(int userId, String preferenceType, String retailerUsername);
-
+    List<Subscription> getAllSubscription();
 }
