@@ -6,7 +6,7 @@ import util.PreferenceType;
 public class Subscription {
 
     private int id;
-    private User user;
+    private int userID;
     private ContactType contactType;
     private PreferenceType preferenceType;
     private String retailerUsername;
@@ -14,42 +14,50 @@ public class Subscription {
     public Subscription() {
     }
 
-    public Subscription(int id, User user, ContactType contactType, PreferenceType preferenceType, String retailerUsername) {
+    public Subscription(int id, int userID, ContactType contactType, PreferenceType preferenceType, String retailerUsername) {
         this.id = id;
-        this.user = user;
+        this.userID = userID;
         this.contactType = contactType;
         this.preferenceType = preferenceType;
         this.retailerUsername = retailerUsername;
     }
 
-     public User getUser() {
-        return user;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public ContactType getContactType() {
         return contactType;
     }
+
     public void setContactType(ContactType contactType) {
         this.contactType = contactType;
     }
+
     public PreferenceType getPreferenceType() {
         return preferenceType;
     }
+
     public void setPreferenceType(PreferenceType preferenceType) {
         this.preferenceType = preferenceType;
     }
+
     public String getRetailerUsername() {
-    return retailerUsername;
+        return retailerUsername;
     }
+
     public void setRetailerUsername(String retailerUsername) {
         this.retailerUsername = retailerUsername;
     }

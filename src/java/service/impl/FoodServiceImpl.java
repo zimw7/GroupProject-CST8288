@@ -14,7 +14,7 @@ public class FoodServiceImpl implements FoodService {
     public FoodServiceImpl() {
         foodDao = new FoodDaoImpl();
     }
-    
+
     public FoodServiceImpl(FoodDao foodDao) {
         this.foodDao = foodDao;
     }
@@ -43,6 +43,10 @@ public class FoodServiceImpl implements FoodService {
     public void deleteOneFood(int foodID) {
         foodDao.deleteFood(foodID);
     }
-    
-    
+
+    @Override
+    public List<Food> getAllFoods() {
+        return foodDao.getAllFoods();
+    }
+
 }

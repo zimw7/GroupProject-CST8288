@@ -5,6 +5,15 @@
             index.jsp
         </welcome-file>
     </welcome-file-list>
+    <servlet>
+        <servlet-name>adminportal</servlet-name>
+        <jsp-file>/admin.jsp</jsp-file>
+    </servlet>
+                                                                                                               
+    <servlet-mapping>
+        <servlet-name>adminportal</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -15,4 +15,6 @@ public interface FoodService {
     void updateOneFood(Food food);
 
     void deleteOneFood(int foodID);
+    
+    List<Food> getAllFoods();
 }
