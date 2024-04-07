@@ -7,7 +7,9 @@ package controller;
 import entity.Food;
 import entity.SurplusFood;
 import entity.User;
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -272,7 +274,52 @@ public class RetailerServlet extends HttpServlet {
         request.setAttribute("successMessage", "Delete food item successful!");
         doGet(request, response);
     }
+    
+     protected void report(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String retailer = request.getParameter("retailer");
+        String[] foodIDs = request.getParameterValues("selectOption");
 
+        String fileName = "SurplusReport.txt";
+        File myFile = new File(fileName);
+
+        try (PrintWriter writer = new PrintWriter(fileName)) {
+            Date today = new Date();
+            writer.println("Report saved on: " + today + " for retailer: " + retailer);
+
+            for (String foodID : foodIDs) {
+                int id = Integer.parseInt(foodID);
+                SurplusFood food = surplusFoodService.getSurplusFoodDetail(id);
+                if (food != null) {
+                    String name = food.getName();
+                    String quantity = String.valueOf(food.getQuantity());
+                    String price = String.valueOf(food.getPrice());
+                    String type = String.valueOf(food.getFoodType());
+                    String expiration = String.valueOf(food.getExpirationDate());
+                    String discount = String.valueOf(food.getDiscountRate());
+                    String donation = String.valueOf(food.isIsForDonation());
+
+                    writer.println("\nFood ID: " + id);
+                    writer.println("Name: " + name);
+                    writer.println("Quantity: " + quantity);
+                    writer.println("Price: " + price);
+                    writer.println("Type: " + type);
+                    writer.println("Expiration: " + expiration);
+                    writer.println("Discount: " + discount);
+                    writer.println("Is it for donation: " + donation);
+                }
+            }
+            writer.flush();
+            String locationMessage = "You can locate your file at: " + myFile.getCanonicalPath();
+            request.setAttribute("successReportMessage", "Data saved successfully.");
+            request.setAttribute("locationMessage", locationMessage);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            request.setAttribute("errorReportMessage", "Error saving data, please try again.");
+        }
+        doGet(request, response);
+    }
     /**
      * Returns a short description of the servlet.
      *
