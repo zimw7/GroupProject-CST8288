@@ -71,13 +71,11 @@
                                 <input type="hidden" name="updateFlag" value="0"> 
                                 <button class="but" type="submit">Surplus</button>
                             </form>
-                            </form>
                         </td>
                         <td>
                             <form action="deleteFood.do" method="post">
                                 <input type="hidden" name="selectOption" value="<%=food.getId()%>">
                                 <button class="but" type="submit">Delete</button>
-                            </form>
                             </form>
                         </td>
                     </tr>

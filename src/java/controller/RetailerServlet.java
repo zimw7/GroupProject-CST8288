@@ -185,8 +185,10 @@ public class RetailerServlet extends HttpServlet {
 
         foodService.updateOneFood(food);
 
-        request.setAttribute("successMessage", "Add food item successful! Please go back to dashboard");
-        request.getRequestDispatcher("/views/updateFood.jsp").forward(request, response);
+        request.setAttribute("successMessage", "Update food item successful!");
+        // refresh table entries
+        doGet(request, response);
+//        request.getRequestDispatcher("/views/updateFood.jsp").forward(request, response);
 
     }
 
@@ -212,8 +214,10 @@ public class RetailerServlet extends HttpServlet {
 
         foodService.deleteOneFood(food.getId());
         surplusFoodService.addSurplusFood(surplusfood);
-        request.setAttribute("successMessage", "Add food item successful! Please go back to dashboard");
-        request.getRequestDispatcher("/views/listSurplusFood.jsp").forward(request, response);
+        request.setAttribute("successMessage", "Add surplus food item successful!");
+        // refresh table entries
+        doGet(request, response);
+//        request.getRequestDispatcher("/views/listSurplusFood.jsp").forward(request, response);
     }
 
     private void deleteFood(HttpServletRequest request, HttpServletResponse response)
@@ -255,8 +259,9 @@ public class RetailerServlet extends HttpServlet {
         surplusfood.setIsForDonation(isForDonation);
 
         surplusFoodService.updateSurplusFood(surplusfood);
-        request.setAttribute("successMessage", "Add food item successful! Please go back to dashboard");
-        request.getRequestDispatcher("/views/updateSurplusFood.jsp").forward(request, response);
+        request.setAttribute("successMessage", "Update surplus food item successful!");
+        doGet(request, response);
+//        request.getRequestDispatcher("/views/updateSurplusFood.jsp").forward(request, response);
     }
     
     private void unSurplusFood(HttpServletRequest request, HttpServletResponse response)
