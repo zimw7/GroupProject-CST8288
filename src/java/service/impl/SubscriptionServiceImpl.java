@@ -43,6 +43,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public List<Subscription> getAllSubscriptions() {
         return subscriptionDao.getAllSubscription();
     }
+
+    @Override
+    public List<Subscription> getSubscriptionsByID(int userid) {
+        return subscriptionDao.getSubscriptionByID(userid);
+    }
     
     
 }

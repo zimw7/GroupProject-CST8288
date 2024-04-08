@@ -11,7 +11,7 @@ import entity.SurplusFood;
 import entity.User;
 import java.util.List;
 import service.SurplusFoodService;
-import util.ContactType;
+import util.UserType;
 
 
 public class SurplusFoodServiceImpl implements SurplusFoodService {
@@ -35,19 +35,22 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     }
 
 
-    public void listSurplusFood(SurplusFood food) {
-        List<Subscription> subscriptions = subscriptionDao.getSubscriptionsByPreference(food.getFoodType());
+    public void listSurplusFood(SurplusFood food, User retailer) {
+        List<Subscription> subscriptions = subscriptionDao.getSubscriptionsByPreference(food.getFoodType(), retailer.getUserName());
 
         for (Subscription subscription : subscriptions) {
             int userID = subscription.getUserID();
             User user = userDao.getUserById(userID);
-            String message = "Available surplus food: " + food.getName();
+            if((user.getUserType() == UserType.CUSTOMER && !food.isIsForDonation()) || 
+                    (user.getUserType() == UserType.CHARITY && food.isIsForDonation())) {
+                String message = "Available surplus food: " + food.getName() + " at " + retailer.getUserName();
 
-            notificationService.sendNotification(
-                    subscription.getContactType() == ContactType.EMAIL ? user.getEmail() : user.getPhoneNumber(),
-                    message,
-                    subscription.getContactType()
-            );
+                notificationService.sendNotification(
+                        user,
+                        message,
+                        subscription.getContactType()
+                );
+            }
         }
     }
 
@@ -104,6 +107,11 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
     public List<SurplusFood> getSurplusFoodsForDonation() {
          return surplusfoodDao.getSurplusFoodsForDonation();
 
+    }
+
+    @Override
+    public List<SurplusFood> getSurplusFoodsForSale() {
+        return surplusfoodDao.getSurplusFoodsForSale();
     }
     
     

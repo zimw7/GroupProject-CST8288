@@ -42,7 +42,7 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
     @Override
     public List<Subscription> findSubscriptionsByUserAndPreference(int userId, String preferenceType, String retailerUsername) {
         List<Subscription> subscriptions = new ArrayList<>();
-        String sql = "SELECT * FROM Subscription WHERE user_id = ? AND preference_type = ? AND retailer_username = ?";
+        String sql = "SELECT * FROM Subscription WHERE USER_ID = ? AND PREFERENCE_TYPE = ? AND RETAILER_USERNAME = ?";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userId);
             stmt.setString(2, preferenceType);
@@ -50,6 +50,11 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Subscription subscription = new Subscription();
+                subscription.setId(rs.getInt("ID"));
+                subscription.setUserID(rs.getInt("USER_ID"));
+                subscription.setContactType(ContactType.valueOf(rs.getString("CONTACT_TYPE")));
+                subscription.setPreferenceType(PreferenceType.valueOf(rs.getString("PREFERENCE_TYPE")));
+                subscription.setRetailerUsername(rs.getString("RETAILER_USERNAME"));
                 subscriptions.add(subscription);
             }
         } catch (SQLException e) {
@@ -59,16 +64,20 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
     }
 
     @Override
-    public List<Subscription> getSubscriptionsByPreference(FoodType foodType) {
+    public List<Subscription> getSubscriptionsByPreference(FoodType foodType, String retailer_name) {
         List<Subscription> subscriptions = new ArrayList<>();
-        String sql = "SELECT * FROM SUBSCRIPTION WHERE PREFERENCE_TYPE = ?";
+        String sql = "SELECT * FROM SUBSCRIPTION WHERE PREFERENCE_TYPE = ? AND RETAILER_USERNAME = ?";
         try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, foodType.toString());
+            stmt.setString(2, retailer_name);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Subscription subscription = new Subscription();
-
                     subscription.setId(rs.getInt("ID"));
+                    subscription.setUserID(rs.getInt("USER_ID"));
+                    subscription.setContactType(ContactType.valueOf(rs.getString("CONTACT_TYPE")));
+                    subscription.setPreferenceType(PreferenceType.valueOf(rs.getString("PREFERENCE_TYPE")));
+                    subscription.setRetailerUsername(rs.getString("RETAILER_USERNAME"));
                     subscriptions.add(subscription);
                 }
             }
@@ -96,6 +105,28 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
             }
         } catch (SQLException e) {
             System.out.println("Error getting subscriptions by preference: " + e.getMessage());
+        }
+        return subscriptions;
+    }
+
+    @Override
+    public List<Subscription> getSubscriptionByID(int userid) {
+        List<Subscription> subscriptions = new ArrayList<>();
+        String sql = "SELECT * FROM Subscription WHERE USER_ID = ?";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userid);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Subscription subscription = new Subscription();
+                subscription.setId(rs.getInt("ID"));
+                subscription.setUserID(rs.getInt("USER_ID"));
+                subscription.setContactType(ContactType.valueOf(rs.getString("CONTACT_TYPE")));
+                subscription.setPreferenceType(PreferenceType.valueOf(rs.getString("PREFERENCE_TYPE")));
+                subscription.setRetailerUsername(rs.getString("RETAILER_USERNAME"));
+                subscriptions.add(subscription);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return subscriptions;
     }
