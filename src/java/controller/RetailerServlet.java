@@ -214,6 +214,8 @@ public class RetailerServlet extends HttpServlet {
 
         foodService.deleteOneFood(food.getId());
         surplusFoodService.addSurplusFood(surplusfood);
+        User owner = (User) session.getAttribute("user");
+        surplusFoodService.listSurplusFood(surplusfood, owner);
         request.setAttribute("successMessage", "Add surplus food item successful!");
         // refresh table entries
         doGet(request, response);

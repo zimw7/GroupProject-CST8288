@@ -11,9 +11,11 @@ public interface SurplusFoodService {
      
     boolean claimSurplusFood(int foodId, int quantity);
     List<SurplusFood> getSurplusFoodsForDonation();
+    List<SurplusFood> getSurplusFoodsForSale();
     List<SurplusFood> getSurplusFoodByUser(User user);
     SurplusFood getSurplusFoodDetail(int surplusfoodID);
     void updateSurplusFood(SurplusFood food);
+    void listSurplusFood(SurplusFood food, User retailer);
 
     void updateSurplusQuantity (int id, int quantity);
 
