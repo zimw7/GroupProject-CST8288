@@ -110,3 +110,4 @@ select * from USERS;
 select * from SUBSCRIPTION;
 select * from FOOD;
 select * from SURPLUS_FOOD;
+select * from ALERT;

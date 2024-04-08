@@ -7,10 +7,7 @@ package service.impl;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
 import entity.User;
-import service.impl.UserServiceImpl;
 import util.LoginResult;
 import util.UserType;
 

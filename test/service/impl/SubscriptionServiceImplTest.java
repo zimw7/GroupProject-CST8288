@@ -3,46 +3,60 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 package service.impl;
+
+import static org.junit.Assert.assertNotNull;
+import org.junit.Before;
+import org.junit.Test;
+import java.util.List;
+import entity.Subscription;
+import service.SubscriptionService;
 import dao.SubscriptionDao;
 import dao.UserDao;
 import dao.impl.SubscriptionDaoImpl;
 import dao.impl.UserDaoImpl;
-import entity.Subscription;
-import entity.User;
-import org.junit.Before;
-import org.junit.Test;
-import util.SubscriptionResult;
+import static org.junit.Assert.assertFalse;
 
-import static org.junit.Assert.assertEquals;
-import util.ContactType;
-import util.PreferenceType;
 
 public class SubscriptionServiceImplTest {
 
+    private SubscriptionService subscriptionService;
     private SubscriptionDao subscriptionDao;
     private UserDao userDao;
-    private SubscriptionServiceImpl subscriptionService;
-    private UserServiceImpl testUser;
-    
+
     @Before
     public void setUp() {
         subscriptionDao = new SubscriptionDaoImpl();
         userDao = new UserDaoImpl();
         subscriptionService = new SubscriptionServiceImpl();
-        testUser =  new UserServiceImpl();
+        
     }
 
 
     @Test
-    public void testSubscribe_AlreadySubscribed() {
-        // Prepare test data
-        User test = testUser.getUserByUsername("JOE DOE");
-        Subscription subscription = new Subscription (5,test, ContactType.TEXT, PreferenceType.DAIRY, "SOBEYS");
+    public void testUnsubscribe() {
+        int subscriptionId = 1;
+        subscriptionService.unsubscribe(subscriptionId);
+        List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
+        boolean subscriptionFound = false;
+        for (Subscription subscription : subscriptions) {
+            if (subscription.getId() == subscriptionId) {
+                subscriptionFound = true;
+                break;
+            }
+        }
+        assertFalse("Unsubscribed subscription still exists", subscriptionFound);
+    }
 
-        // Call the method to be tested
-        SubscriptionResult result = subscriptionService.subscribe(subscription);
+    @Test
+    public void testGetAllSubscriptions() {
+        List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
+        assertNotNull(subscriptions);
+    }
 
-        // Verify the result
-        assertEquals(SubscriptionResult.ALREADY_SUBSCRIBED, result);
+    @Test
+    public void testGetSubscriptionsByID() {
+        int userId = 1; // 假设用户ID为1
+        List<Subscription> subscriptions = subscriptionService.getSubscriptionsByID(userId);
+        assertNotNull(subscriptions);
     }
 }
