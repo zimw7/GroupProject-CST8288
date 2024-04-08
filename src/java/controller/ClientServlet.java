@@ -39,7 +39,7 @@ public class ClientServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         List<SurplusFood> surplusfoods = null;
-        surplusfoods = surplusFoodService.getSurplusFoodsForSale();
+        surplusfoods = surplusFoodService.getAllSurplusFood();
         request.setAttribute("surplusFood", surplusfoods);
 
         List<String> notifications = notificationService.getNotifications(user.getId());

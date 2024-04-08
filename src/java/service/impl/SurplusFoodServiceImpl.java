@@ -41,7 +41,7 @@ public class SurplusFoodServiceImpl implements SurplusFoodService {
         for (Subscription subscription : subscriptions) {
             int userID = subscription.getUserID();
             User user = userDao.getUserById(userID);
-            if((user.getUserType() == UserType.CUSTOMER && !food.isIsForDonation()) || 
+            if((user.getUserType() == UserType.CUSTOMER) || 
                     (user.getUserType() == UserType.CHARITY && food.isIsForDonation())) {
                 String message = "Available surplus food: " + food.getName() + " at " + retailer.getUserName();
 

@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="entity.User"%>
+<%@page import="util.UserType"%>
 <%@page import="java.util.List"%>
 <%@page import="entity.Subscription"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -85,8 +86,20 @@
 
         </div><br>
 
-        <div>     
-            <p>Back to &#128073; <a href="${pageContext.request.contextPath}/CustomerServlet">DashBoard</a></p>
+        <div>
+            <%
+                User user = (User) session.getAttribute("user");
+                if (user != null) {
+                    if (user.getUserType() == UserType.CUSTOMER) {
+            %>
+            <p>Back to &#128073; <a href="${pageContext.request.contextPath}/ClientServlet">DashBoard</a></p>
+            <% } else if (user.getUserType() == UserType.CHARITY) {
+            %>
+            <p>Back to &#128073; <a href="${pageContext.request.contextPath}/ShowDonationFoodsServlet">DashBoard</a></p>
+            <%}
+                }%>
+
+
         </div>
 
 
