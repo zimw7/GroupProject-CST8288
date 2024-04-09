@@ -21,18 +21,26 @@ import service.impl.FoodServiceImpl;
 import service.impl.SubscriptionServiceImpl;
 import service.impl.SurplusFoodServiceImpl;
 import service.impl.UserServiceImpl;
-
+/**
+ * Servlet implementation class AdminServlet that can view
+ * user, food, surplus food, and subscription lists within the admin dashboard.
+ * This servlet supports actions like logging in as an admin, viewing users, foods, surplus foods,
+ * and subscriptions.
+ * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @since 1.0
+ * @version 1.5
+ */
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet", "*.admindo"})
 public class AdminServlet extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
+     /**
+     * Redirects HTTP GET requests to the doPost method.
+     * This method ensures that both GET and POST requests are handled in the same manner.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @param request  The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException      if an I/O error occurs.
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,12 +49,13 @@ public class AdminServlet extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles HTTP POST requests by dynamically invoking methods based on the request URI.
+     * It extracts a method name from the URI and uses reflection to call a corresponding method.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @param request  The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException      if an I/O error occurs.
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -73,7 +82,16 @@ public class AdminServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    /**
+     * Processes login requests for the admin dashboard. It checks the credentials against
+     * hardcoded values and redirects the user accordingly.
+     *
+     * @param request  The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException      if an I/O error occurs.
+     */
     private void login(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -87,7 +105,15 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("errorMessage", "login failed");
         request.getRequestDispatcher("/admin.jsp").forward(request, response);
     }
-
+    
+    /**
+     * Retrieves all users from the database and forwards them to the admin user management page.
+     *
+     * @param request  The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException      if an I/O error occurs.
+     */
     private void getUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserService userservice = new UserServiceImpl();
@@ -101,6 +127,14 @@ public class AdminServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
     
+    /**
+     * Retrieves all foods from the database and forwards them to the admin food management page.
+     *
+     * @param request  The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException      if an I/O error occurs.
+     */
     private void getFoods(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         FoodService foodservice = new FoodServiceImpl();
@@ -113,7 +147,14 @@ public class AdminServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/foods.jsp");
         dispatcher.forward(request, response);
     }
-    
+    /**
+     * Retrieves all surplus foods from the database and forwards them to the admin surplus food management page.
+     *
+     * @param request  The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException      if an I/O error occurs.
+     */
     private void getSurplusFoods(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SurplusFoodService surplusFoodService = new SurplusFoodServiceImpl();
@@ -126,7 +167,14 @@ public class AdminServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/surplusfoods.jsp");
         dispatcher.forward(request, response);
     }
-    
+    /**
+     * Retrieves all subscriptions from the database and forwards them to the admin subscription management page.
+     *
+     * @param request  The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException      if an I/O error occurs.
+     */
     private void getSubscriptions(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SubscriptionService subscriptionFoodService = new SubscriptionServiceImpl();

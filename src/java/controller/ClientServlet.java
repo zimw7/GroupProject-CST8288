@@ -17,12 +17,28 @@ import service.impl.NotificationServiceImpl;
 
 import service.impl.SurplusFoodServiceImpl;
 
+/**
+ * A servlet that handles customer requests.
+ *
+ * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @since 1.0
+ * @version 1.5
+ */
 @WebServlet(name = "ClientServlet", urlPatterns = {"/ClientServlet"})
 public class ClientServlet extends HttpServlet {
 
     private SurplusFoodService surplusFoodService = null;
     private NotificationService notificationService = null;
 
+    /**
+     * Initializes the servlet. This method is called by the servlet container
+     * to indicate to a servlet that the servlet is being placed into service.
+     * It initializes instances of {@link SurplusFoodService} and
+     * {@link NotificationService} for later use in handling client requests.
+     *
+     * @throws ServletException if an exception occurs that interrupts the
+     * servlet's normal operation.
+     */
     @Override
     public void init() throws ServletException {
         super.init();
@@ -31,10 +47,18 @@ public class ClientServlet extends HttpServlet {
 
     }
 
+    /**
+     * Handles HTTP GET requests from Customers.
+     *
+     * @param request The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
