@@ -16,35 +16,73 @@ import util.ContactType;
 import util.PreferenceType;
 import util.SubscriptionResult;
 
+/**
+ * Servlet handling subscription operations. Allows users to subscribe to
+ * updates from retailers, view their current subscriptions, and unsubscribe
+ * from them.
+ *
+ * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @since 1.0
+ * @version 1.5
+ */
 @WebServlet(name = "SubscribeServlet", urlPatterns = {"/SubscribeServlet", "*.subdo"})
 public class SubscribeServlet extends HttpServlet {
 
     private SubscriptionService subscriptionService;
     private UserService userService;
 
+    /**
+     * Initializes the servlet. Instantiates services for subscription and user
+     * operations.
+     *
+     * @throws ServletException if an exception occurs that interrupts the
+     * servlet's normal operation.
+     */
     @Override
     public void init() throws ServletException {
         this.subscriptionService = new SubscriptionServiceImpl();
         this.userService = new UserServiceImpl();
     }
 
+    /**
+     * Handles HTTP GET requests. Fetches and displays information about
+     * retailers and the current user's subscriptions. Forwards this information
+     * to the subscription view page.
+     *
+     * @param request servlet request containing session and user information.
+     * @param response servlet response for forwarding to the subscription view.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        
+
         List<User> retailers = userService.getAllRetailers();
         for (User retailer : retailers) {
             System.out.println("Retailer username: " + retailer.getUserName());
         }
         request.setAttribute("retailers", retailers);
-        
+
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsByID(user.getId());
         request.setAttribute("subscriptions", subscriptions);
-        
+
         request.getRequestDispatcher("/views/subscribe.jsp").forward(request, response);
     }
 
+    /**
+     * Handles HTTP POST requests dynamically. It uses reflection to invoke
+     * methods based on the request URI, facilitating operations such as
+     * subscribing and unsubscribing.
+     *
+     * @param request servlet request containing details for the subscription
+     * operation.
+     * @param response servlet response for processing the result of the
+     * subscription operation.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = request.getRequestURI();
@@ -59,7 +97,16 @@ public class SubscribeServlet extends HttpServlet {
             throw new RuntimeException("method error" + methodName, e);
         }
     }
-    
+
+    /**
+     * Processes subscription requests.
+     *
+     * @param request servlet request containing subscription details.
+     * @param response servlet response for redirecting to the subscription
+     * view.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void subscribe(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String preferenceType = request.getParameter("preferenceType");
@@ -100,7 +147,17 @@ public class SubscribeServlet extends HttpServlet {
             response.sendRedirect("index.jsp");
         }
     }
-    
+
+    /**
+     * Processes unsubscription requests.
+     *
+     * @param request servlet request containing the ID of the subscription to
+     * be removed.
+     * @param response servlet response for redirecting to the subscription
+     * view.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void unsubscribe(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int subscriptionID = Integer.parseInt(request.getParameter("selectOption"));

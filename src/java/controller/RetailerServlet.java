@@ -27,12 +27,27 @@ import service.impl.FoodServiceImpl;
 import service.impl.SurplusFoodServiceImpl;
 import util.FoodType;
 
+/**
+ * Servlet implementation class for handling retailer operations such as
+ * managing food inventory, listing and managing surplus food, and generating
+ * reports.
+ *
+ * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @since 1.0
+ * @version 1.5
+ */
 @WebServlet(name = "RetailerServlet", urlPatterns = {"/RetailerServlet", "*.do"})
 public class RetailerServlet extends HttpServlet {
 
     private FoodService foodService = null;
     private SurplusFoodService surplusFoodService = null;
 
+    /**
+     * Initializes the servlet.
+     *
+     * @throws ServletException if an exception occurs that interrupts the
+     * servlet's normal operation.
+     */
     @Override
     public void init() throws ServletException {
         super.init();
@@ -40,14 +55,15 @@ public class RetailerServlet extends HttpServlet {
         this.surplusFoodService = new SurplusFoodServiceImpl();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles HTTP GET requests. This method is responsible for displaying the
+     * retailer dashboard, including information about food inventory and
+     * surplus foods associated with the logged-in user.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @param request The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -65,17 +81,19 @@ public class RetailerServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/retailer_dashboard.jsp");
         dispatcher.forward(request, response);
-        
-        
+
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles HTTP POST requests by dynamically invoking methods based on the
+     * request URI. This allows the servlet to delegate operations such as
+     * adding, updating, and deleting food and surplus food entities to specific
+     * methods identified by the request.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @param request The servlet request.
+     * @param response The servlet response.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -93,6 +111,15 @@ public class RetailerServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Processes requests for adding a new food item.
+     *
+     * @param request servlet request containing food item details.
+     * @param response servlet response for redirecting to the retailer
+     * dashboard.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void addFood(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name = request.getParameter("name");
@@ -135,6 +162,14 @@ public class RetailerServlet extends HttpServlet {
 
     }
 
+    /**
+     * Retrieves detailed information for a specific food item based on its ID.
+     *
+     * @param request servlet request containing the foodID parameter.
+     * @param response servlet response for forwarding to the next view.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void getFoodDetail(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String foodID = request.getParameter("selectOption");
@@ -150,6 +185,15 @@ public class RetailerServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Handles the update request for an existing food item.
+     *
+     * @param request servlet request containing updated food item details.
+     * @param response servlet response for redirecting to the retailer
+     * dashboard.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void updateFood(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -192,6 +236,15 @@ public class RetailerServlet extends HttpServlet {
 
     }
 
+    /**
+     * Processes requests for listing an existing food item as surplus.
+     *
+     * @param request servlet request containing surplus food details.
+     * @param response servlet response for redirecting to the retailer
+     * dashboard.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void listOneSurplusFood(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -217,11 +270,22 @@ public class RetailerServlet extends HttpServlet {
         User owner = (User) session.getAttribute("user");
         surplusFoodService.listSurplusFood(surplusfood, owner);
         request.setAttribute("successMessage", "Add surplus food item successful!");
-        // refresh table entries
+
         doGet(request, response);
-//        request.getRequestDispatcher("/views/listSurplusFood.jsp").forward(request, response);
+
     }
 
+    /**
+     * Handles requests for deleting a specific food item from the inventory.
+     * After deletion, redirects back to the retailer dashboard with a success
+     * message.
+     *
+     * @param request servlet request containing the foodID to delete.
+     * @param response servlet response for redirecting to the retailer
+     * dashboard.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void deleteFood(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int foodID = Integer.parseInt(request.getParameter("selectOption"));
@@ -230,6 +294,16 @@ public class RetailerServlet extends HttpServlet {
         doGet(request, response);
     }
 
+    /**
+     * Retrieves and sets the detailed information of a specific surplus food
+     * item based on its ID.
+     *
+     * @param request servlet request containing the surplusfoodID parameter.
+     * @param response servlet response for forwarding to the
+     * updateSurplusFood.jsp view.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void getSurplusFoodDetail(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String surplusfoodID = request.getParameter("selectOption");
@@ -240,7 +314,18 @@ public class RetailerServlet extends HttpServlet {
         session.setAttribute("foodDetail", surplusfood);
         request.getRequestDispatcher("/views/updateSurplusFood.jsp").forward(request, response);
     }
-    
+
+    /**
+     * Updates an existing surplus food item's details. After processing the
+     * update, redirects back to the retailer dashboard with a corresponding
+     * message.
+     *
+     * @param request servlet request containing updated surplus food details.
+     * @param response servlet response for redirecting to the retailer
+     * dashboard.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void updateSurplusFood(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -263,9 +348,20 @@ public class RetailerServlet extends HttpServlet {
         surplusFoodService.updateSurplusFood(surplusfood);
         request.setAttribute("successMessage", "Update surplus food item successful!");
         doGet(request, response);
-//        request.getRequestDispatcher("/views/updateSurplusFood.jsp").forward(request, response);
+
     }
-    
+
+    /**
+     * Removes a surplus food item from the surplus list and optionally adds it
+     * back to the regular food inventory.
+     *
+     * @param request servlet request containing the ID of the surplus food to
+     * "unsurplus".
+     * @param response servlet response for redirecting to the retailer
+     * dashboard.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void unSurplusFood(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int surplusfoodID = Integer.parseInt(request.getParameter("selectOption"));
@@ -275,7 +371,18 @@ public class RetailerServlet extends HttpServlet {
         request.setAttribute("successMessage", "Unsurplus food item successful!");
         doGet(request, response);
     }
-    
+
+    /**
+     * Deletes a specific surplus food item from the surplus inventory.
+     * Redirects back to the retailer dashboard with a success message after
+     * deletion.
+     *
+     * @param request servlet request containing the surplusfoodID to delete.
+     * @param response servlet response for redirecting to the retailer
+     * dashboard.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     private void deleteSurplusFood(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int surplusfoodID = Integer.parseInt(request.getParameter("selectOption"));
@@ -283,8 +390,19 @@ public class RetailerServlet extends HttpServlet {
         request.setAttribute("successMessage", "Delete food item successful!");
         doGet(request, response);
     }
-    
-     protected void report(HttpServletRequest request, HttpServletResponse response)
+
+    /**
+     * Generates a report for selected surplus food items, saving the report to
+     * a text file.
+     *
+     * @param request servlet request containing parameters for generating the
+     * report.
+     * @param response servlet response for redirecting to the retailer
+     * dashboard with the report details.
+     * @throws ServletException if a servlet-specific error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
+    protected void report(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String retailer = request.getParameter("retailer");
         String[] foodIDs = request.getParameterValues("selectOption");
@@ -329,6 +447,7 @@ public class RetailerServlet extends HttpServlet {
         }
         doGet(request, response);
     }
+
     /**
      * Returns a short description of the servlet.
      *
