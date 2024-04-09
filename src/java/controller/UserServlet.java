@@ -15,7 +15,9 @@ import util.LoginResult;
  * login page, while POST requests handle the login logic and authentication of
  * users attempting to log in.
  *
- * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  * @since 1.0
  * @version 1.5
  */

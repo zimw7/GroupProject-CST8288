@@ -10,11 +10,13 @@ import service.SurplusFoodService;
 import service.impl.SurplusFoodServiceImpl;
 
 /**
- * Servlet implementation for handling food claim requests by charities.
- * It interacts with the {@link SurplusFoodService} to claim
- * surplus food items for donation purposes.
+ * Servlet implementation for handling food claim requests by charities. It
+ * interacts with the {@link SurplusFoodService} to claim surplus food items for
+ * donation purposes.
  *
- * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  * @since 1.0
  * @version 1.5
  */
@@ -22,27 +24,29 @@ import service.impl.SurplusFoodServiceImpl;
 public class ClaimFoodServlet extends HttpServlet {
 
     private SurplusFoodService surplusFoodService;
-    
+
     /**
-     * Initializes the servlet and creates an instance of {@link SurplusFoodServiceImpl}.
-     * This method is called by the servlet container to indicate to a servlet that the
-     * servlet is being placed into service.
+     * Initializes the servlet and creates an instance of
+     * {@link SurplusFoodServiceImpl}. This method is called by the servlet
+     * container to indicate to a servlet that the servlet is being placed into
+     * service.
      *
-     * @throws ServletException if an exception occurs that interrupts the servlet's normal operation.
+     * @throws ServletException if an exception occurs that interrupts the
+     * servlet's normal operation.
      */
     @Override
     public void init() throws ServletException {
         super.init();
         surplusFoodService = new SurplusFoodServiceImpl();
     }
-    
+
     /**
-     * Processes the POST requests for claiming surplus food items. 
+     * Processes the POST requests for claiming surplus food items.
      *
-     * @param request  The servlet request.
+     * @param request The servlet request.
      * @param response The servlet response.
      * @throws ServletException if a servlet-specific error occurs.
-     * @throws IOException      if an I/O error occurs.
+     * @throws IOException if an I/O error occurs.
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

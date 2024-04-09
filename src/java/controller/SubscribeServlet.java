@@ -21,7 +21,9 @@ import util.SubscriptionResult;
  * updates from retailers, view their current subscriptions, and unsubscribe
  * from them.
  *
- * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  * @since 1.0
  * @version 1.5
  */

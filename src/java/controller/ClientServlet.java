@@ -20,7 +20,9 @@ import service.impl.SurplusFoodServiceImpl;
 /**
  * A servlet that handles customer requests.
  *
- * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  * @since 1.0
  * @version 1.5
  */

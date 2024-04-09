@@ -13,7 +13,9 @@ import java.sql.SQLException;
  * database connection details and ensures that only one instance of the
  * {@link Connection} is active at any given time.
  *
- * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  * @since 1.0
  * @version 1.5
  */

@@ -19,7 +19,9 @@ import service.impl.SurplusFoodServiceImpl;
 /**
  * Servlet responsible for handling requests to purchase surplus food items.
  *
- * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  * @since 1.0
  * @version 1.5
  */

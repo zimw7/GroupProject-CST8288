@@ -4,7 +4,9 @@ package util;
  * Enumerates the different types of food preferences that can be selected by
  * users.
  *
- * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  * @since 1.0
  * @version 1.5
  */

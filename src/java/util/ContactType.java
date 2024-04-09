@@ -5,7 +5,9 @@ package util;
  * This is typically used to specify how users prefer to receive notifications
  * or communications.
  *
- * @author Zimeng Wang, Wenxin Li, Mengying Liu.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  * @since 1.0
  * @version 1.5
  */
