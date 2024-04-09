@@ -3,34 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 package service.impl;
-import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-
-
 import dao.FoodDao;
 import entity.Food;
 import entity.User;
 
 /**
- *
- * @author liuma
+ * Unit tests for the FoodServiceImpl class.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
  */
 public class FoodServiceImplTest {
 
 private FoodDao foodDaoStub;
     private FoodServiceImpl foodService;
 
+    /**
+     * Sets up the test environment before each test method is executed.
+     */
     @Before
     public void setUp() {
         foodDaoStub = new FoodDaoStub();
         foodService = new FoodServiceImpl(foodDaoStub);
     }
 
+    /**
+     * Tests the getFoodInventoryByUser method of FoodServiceImpl.
+     */
     @Test
     public void testGetFoodInventoryByUser() {
         // Prepare test data
@@ -44,6 +49,9 @@ private FoodDao foodDaoStub;
         assertEquals(2, actualFoodList.size()); // Assuming the stub returns 2 foods for user with ID 1
     }
 
+     /**
+     * Tests the addFoodInventory method of FoodServiceImpl.
+     */
     @Test
     public void testAddFoodInventory() {
         // Prepare test data
@@ -56,6 +64,9 @@ private FoodDao foodDaoStub;
         assertEquals(1, ((FoodDaoStub) foodDaoStub).getAddFoodCallCount());
     }
 
+    /**
+     * Tests the getFoodDetail method of FoodServiceImpl.
+     */
     @Test
     public void testGetFoodDetail() {
         // Prepare test data
@@ -68,6 +79,9 @@ private FoodDao foodDaoStub;
         assertEquals(foodID, actualFood.getId()); // Assuming the stub returns food with ID equal to foodID
     }
 
+    /**
+     * Tests the updateOneFood method of FoodServiceImpl.
+     */
     @Test
     public void testUpdateOneFood() {
         // Prepare test data
@@ -80,6 +94,9 @@ private FoodDao foodDaoStub;
         assertEquals(1, ((FoodDaoStub) foodDaoStub).getUpdateFoodCallCount());
     }
 
+    /**
+     * Tests the deleteOneFood method of FoodServiceImpl.
+     */
     @Test
     public void testDeleteOneFood() {
         // Prepare test data
@@ -94,6 +111,9 @@ private FoodDao foodDaoStub;
     }
 }
 
+/**
+ * A stub implementation of the FoodDao interface for testing purposes.
+ */
 class FoodDaoStub implements FoodDao {
     private int addFoodCallCount = 0;
     private int updateFoodCallCount = 0;

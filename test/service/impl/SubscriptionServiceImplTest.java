@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 package service.impl;
-
+/**
+ * Unit tests for the SubscriptionServiceImpl class.
+ * Tests to subscribe, unsubscribe, retrieve all, and retrieve by id.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
+ */
 import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,15 +29,19 @@ public class SubscriptionServiceImplTest {
     private SubscriptionDao subscriptionDao;
     private UserDao userDao;
 
+    /**
+     * Sets up the test environment before each test method is executed.
+     */
     @Before
     public void setUp() {
         subscriptionDao = new SubscriptionDaoImpl();
         userDao = new UserDaoImpl();
         subscriptionService = new SubscriptionServiceImpl();
-        
     }
 
-
+    /**
+     * Tests to unsubscribe
+     */
     @Test
     public void testUnsubscribe() {
         int subscriptionId = 1;
@@ -47,15 +57,21 @@ public class SubscriptionServiceImplTest {
         assertFalse("Unsubscribed subscription still exists", subscriptionFound);
     }
 
+    /**
+     * Tests to retrieve all subscription.
+     */
     @Test
     public void testGetAllSubscriptions() {
         List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
         assertNotNull(subscriptions);
     }
 
+    /**
+     * Tests to retrieve a subscription based on a specific ID.
+     */
     @Test
     public void testGetSubscriptionsByID() {
-        int userId = 1; // 假设用户ID为1
+        int userId = 1; 
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsByID(userId);
         assertNotNull(subscriptions);
     }
