@@ -8,8 +8,24 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the FoodDao interface for managing food entities in the database.
+ * This class provides CRUD operations for Food entities, supporting inventory management
+ * and surplus food tracking within the Food Waste Reduction Platform.
+ *
+ * @author Zimeng Wang, Mengying Liu, Wenxin Li
+ * @date Apr 5, 2024
+ * @labSection CST8288 - 012
+ * @purpose To provide a concrete implementation for managing food items in the database, facilitating
+ *          the tracking and redistribution of surplus food to reduce waste and support community welfare.
+ */
 public class FoodDaoImpl implements FoodDao {
 
+    /**
+     * Inserts a new Food entity into the database.
+     *
+     * @param food The Food item to be added.
+     */
     @Override
     public void addFood(Food food) {
         String sql = "INSERT INTO FOOD (NAME, QUANTITY, PRICE, FOOD_TYPE, EXPIRATION_DATE, USER_ID) VALUES (?, ?, ?, ?, ?, ?)";
@@ -26,6 +42,11 @@ public class FoodDaoImpl implements FoodDao {
         }
     }
 
+    /**
+     * Updates an existing Food entity in the database.
+     *
+     * @param food The Food item with updated information.
+     */
     @Override
     public void updateFood(Food food) {
         String sql = "UPDATE FOOD SET NAME = ?, QUANTITY = ?, PRICE = ?, FOOD_TYPE = ?, EXPIRATION_DATE = ? WHERE ID = ?";
@@ -42,6 +63,11 @@ public class FoodDaoImpl implements FoodDao {
         }
     }
 
+    /**
+     * Deletes a Food entity from the database based on its ID.
+     *
+     * @param foodId The ID of the Food item to be deleted.
+     */
     @Override
     public void deleteFood(int foodId) {
         String sql = "DELETE FROM FOOD WHERE ID = ?";
@@ -53,6 +79,12 @@ public class FoodDaoImpl implements FoodDao {
         }
     }
 
+     /**
+     * Retrieves a Food entity by its ID.
+     *
+     * @param foodId The ID of the Food item to retrieve.
+     * @return The Food entity if found, otherwise null.
+     */
     @Override
     public Food getFoodById(int foodId) {
         String sql = "SELECT * FROM FOOD WHERE ID = ?";
@@ -77,6 +109,11 @@ public class FoodDaoImpl implements FoodDao {
         return null;
     }
 
+    /**
+     * Retrieves all Food entities from the database.
+     *
+     * @return A list of all Food items.
+     */
     @Override
     public List<Food> getAllFoods() {
         List<Food> foods = new ArrayList<>();
@@ -99,6 +136,12 @@ public class FoodDaoImpl implements FoodDao {
         return foods;
     }
 
+    /**
+     * Retrieves Food entities associated with a specific user ID.
+     *
+     * @param userID The ID of the user whose Food items are to be retrieved.
+     * @return A list of Food entities.
+     */
     @Override
     public List<Food> getFoodByUserID(int userID) {
         List<Food> foods = new ArrayList<>();

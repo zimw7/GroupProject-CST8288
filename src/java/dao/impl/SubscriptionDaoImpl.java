@@ -10,8 +10,24 @@ import util.ContactType;
 import util.FoodType;
 import util.PreferenceType;
 
+/**
+ * Implements the SubscriptionDao interface to provide concrete database operations
+ * for Subscription entities. This includes adding, deleting, and finding subscriptions
+ * based on user preferences and associations.
+ *
+ * @author Zimeng Wang, Mengying Liu, Wenxin Li
+ * @date Apr 5, 2024
+ * @labSection CST8288 - 012
+ * @purpose To manage user subscriptions within the Food Waste Reduction Platform database,
+ *          facilitating personalized alerts and notifications for surplus food.
+ */
 public class SubscriptionDaoImpl implements SubscriptionDao {
 
+    /**
+     * Adds a new subscription to the database.
+     *
+     * @param subscription The Subscription entity to add.
+     */
     @Override
     public void addSubscription(Subscription subscription) {
         String sql = "INSERT INTO SUBSCRIPTION (USER_ID, CONTACT_TYPE, PREFERENCE_TYPE, RETAILER_USERNAME) VALUES (?, ?, ?, ?)";
@@ -28,6 +44,11 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
         }
     }
 
+     /**
+     * Deletes an existing subscription from the database.
+     *
+     * @param subscriptionId The ID of the subscription to delete.
+     */
     @Override
     public void deleteSubscription(int subscriptionId) {
         String sql = "DELETE FROM SUBSCRIPTION WHERE ID = ?";
@@ -39,6 +60,14 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
         }
     }
 
+    /**
+     * Finds subscriptions by user ID, preference type, and retailer username.
+     *
+     * @param userId          The user's ID.
+     * @param preferenceType  The type of food preference.
+     * @param retailerUsername The retailer's username associated with the subscription.
+     * @return A list of Subscription entities matching the criteria.
+     */
     @Override
     public List<Subscription> findSubscriptionsByUserAndPreference(int userId, String preferenceType, String retailerUsername) {
         List<Subscription> subscriptions = new ArrayList<>();
@@ -62,6 +91,14 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
         }
         return subscriptions;
     }
+
+    /**
+    * Retrieves a list of subscriptions that match a specific food preference and retailer name.
+    *
+    * @param foodType The type of food preference (e.g., DAIRY, PERISHABLE).
+    * @param retailer_name The name of the retailer associated with the subscription.
+    * @return A list of Subscription entities that match the specified food type and retailer name.
+    */
 
     @Override
     public List<Subscription> getSubscriptionsByPreference(FoodType foodType, String retailer_name) {
@@ -87,6 +124,12 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
         return subscriptions;
     }
 
+    /**
+    * Retrieves all subscriptions from the database. This method is useful for administrative purposes,
+    * allowing an overview of all active subscriptions in the system.
+    *
+    * @return A list of all Subscription entities in the database, ordered by their ID.
+    */
     @Override
     public List<Subscription> getAllSubscription() {
         List<Subscription> subscriptions = new ArrayList<>();
@@ -109,6 +152,14 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
         return subscriptions;
     }
 
+    /**
+    * Retrieves all subscriptions for a specific user based on the user's ID. This method enables
+    * fetching all subscriptions that a particular user has created, allowing for a personalized
+    * user experience and management of their subscription preferences.
+    *
+    * @param userid The ID of the user whose subscriptions are to be retrieved.
+    * @return A list of Subscription entities associated with the specified user ID.
+    */
     @Override
     public List<Subscription> getSubscriptionByID(int userid) {
         List<Subscription> subscriptions = new ArrayList<>();

@@ -11,8 +11,25 @@ import util.FoodType;
 import dao.SurplusFoodDao;
 import entity.SurplusFood;
 
+/**
+ * Implements the SurplusFoodDao interface to provide concrete database operations
+ * for SurplusFood entities. This includes adding, updating, deleting, and querying surplus
+ * food items, supporting the platform's goal of reducing food waste.
+ *
+ * @author Zimeng Wang, Mengying Liu, Wenxin Li
+ * @date Apr 5, 2024
+ * @labSection CST8288 - 012
+ * @purpose To manage surplus food items within the Food Waste Reduction Platform database,
+ *          helping to connect surplus food with those in need or those willing to purchase
+ *          at a discounted rate.
+ */
 public class SurplusFoodDaoImpl implements SurplusFoodDao {
 
+    /**
+     * Adds a new surplus food item to the database.
+     *
+     * @param surplusfood The SurplusFood entity to add.
+     */
     @Override
     public void addSurplusFood(SurplusFood surplusfood) {
         String sql = "INSERT INTO SURPLUS_FOOD (NAME, QUANTITY, FOOD_TYPE, EXPIRATION_DATE, PRICE, DISCOUNT_RATE, IS_FOR_DONATION, USER_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -31,6 +48,11 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         }
     }
 
+     /**
+     * Updates an existing surplus food item in the database.
+     *
+     * @param surplusfood The SurplusFood entity with updated information.
+     */
     @Override
     public void updateSurplusFood(SurplusFood surplusfood) {
         String sql = "UPDATE SURPLUS_FOOD SET NAME = ?, QUANTITY = ?, PRICE = ?, FOOD_TYPE = ?, EXPIRATION_DATE = ?, "
@@ -50,7 +72,11 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         }
     }
 
-    
+    /**
+     * Deletes a surplus food item from the database based on its ID.
+     *
+     * @param foodId The ID of the SurplusFood item to delete.
+     */
     @Override
     public void deleteSurplusFood(int foodId) {
         String sql = "DELETE FROM SURPLUS_FOOD WHERE ID = ?";
@@ -62,7 +88,12 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         }
     }
     
-
+    /**
+    * Retrieves a specific SurplusFood item by its ID from the database.
+    * 
+    * @param foodId The unique identifier of the surplus food item to retrieve.
+    * @return A SurplusFood object if found, otherwise returns null.
+    */
     @Override
     public SurplusFood getSurplusFoodById(int foodId) {
         String sql = "SELECT * FROM SURPLUS_FOOD WHERE ID = ?";
@@ -89,6 +120,11 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         return null;
     }
 
+    /**
+    * Retrieves all surplus food items from the database.
+    * 
+    * @return A list of all SurplusFood items stored in the database, or an empty list if no items are found.
+    */
     @Override
     public List<SurplusFood> getAllSurplusFoods() {
         List<SurplusFood> surplusfoods = new ArrayList<>();
@@ -113,6 +149,11 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         return surplusfoods;
     }
 
+    /**
+    * Retrieves all surplus food items that are marked for donation.
+    * 
+    * @return A list of SurplusFood items available for donation, or an empty list if no such items are found.
+    */
     @Override
     public List<SurplusFood> getSurplusFoodsForDonation() {
         List<SurplusFood> surplusfoods = new ArrayList<>();
@@ -130,22 +171,20 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
                 surplusfood.setIsForDonation(rs.getBoolean("IS_FOR_DONATION"));
                 surplusfood.setUserID(rs.getInt("USER_ID"));
                 surplusfoods.add(surplusfood);
-                
                 System.out.println("Retrieved food for donation: " + surplusfood.getName());
-           
             }
         } catch (SQLException e) {
-            
              System.err.println("Error when retrieving foods for donation: " + e.getMessage());
-           
-             
             e.printStackTrace();
         }
-        
-        
         return surplusfoods;
     }
 
+    /**
+    * Retrieves all surplus food items that are available for sale.
+    * 
+    * @return A list of SurplusFood items available for sale, or an empty list if no such items are found.
+    */
     @Override
     public List<SurplusFood> getSurplusFoodsForSale() {
         List<SurplusFood> surplusfoods = new ArrayList<>();
@@ -170,6 +209,12 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         return surplusfoods;
     }
 
+    /**
+    * Retrieves all surplus food items associated with a specific user ID. 
+    * 
+    * @param userID The unique identifier of the user whose surplus food items are to be retrieved.
+    * @return A list of SurplusFood items associated with the specified user, or an empty list if no such items are found.
+    */
     @Override
     public List<SurplusFood> getSurplusFoodByUserID(int userID) {
         List<SurplusFood> surplusfoods = new ArrayList<>();
@@ -197,6 +242,12 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
         return surplusfoods;
     }
     
+    /**
+    * Updates the quantity of a specific surplus food item in the database. 
+    * 
+    * @param id The unique identifier of the surplus food item to update.
+    * @param quantity The new quantity to be set for the surplus food item.
+    */
     @Override
     public void updateSurplusQuantity(int id, int quantity){
         String sql = "UPDATE SURPLUS_FOOD SET QUANTITY = ? WHERE ID = ?";
@@ -208,7 +259,5 @@ public class SurplusFoodDaoImpl implements SurplusFoodDao {
             e.printStackTrace();
         }
     }
-
-
 
 }
