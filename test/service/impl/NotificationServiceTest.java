@@ -3,14 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 package service.impl;
+/**
+ * Unit tests for the NotificationServiceImpl class.
+ * Tests different notification sending methods and retrieval of notifications.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
+ */
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import dao.AlertDao;
 import dao.impl.AlertDaoImpl;
 import entity.User;
@@ -23,6 +27,9 @@ public class NotificationServiceTest {
     private NotificationService notificationService;
     private AlertDao alertDao;
 
+    /**
+     * Sets up the test environment before each test method is executed.
+     */
     @Before
     public void setUp() {
         
@@ -30,6 +37,9 @@ public class NotificationServiceTest {
         notificationService = new NotificationServiceImpl();
     }
 
+    /**
+     * Tests sending a notification via email.
+     */
     @Test
     public void testSendNotificationEmail() {
         User user = new User(1,"testUser","password",UserType.CUSTOMER, "1234567890","test@example.com",true);
@@ -42,6 +52,9 @@ public class NotificationServiceTest {
         assertTrue(notifications.contains(message));
     }
 
+    /**
+     * Tests sending a notification via text message.
+     */
     @Test
     public void testSendNotificationText() {
        User user = new User(1,"testUser","password",UserType.CUSTOMER, "1234567890","test@example.com",true);
@@ -54,6 +67,9 @@ public class NotificationServiceTest {
         assertTrue(notifications.contains(message));
     }
 
+    /**
+     * Tests retrieving notifications for a user.
+     */
     @Test
     public void testGetNotifications() {
         User user = new User(1,"testUser","password",UserType.CUSTOMER, "1234567890","test@example.com",true);

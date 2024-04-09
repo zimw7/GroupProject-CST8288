@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 package service.impl;
-
+/**
+ * Unit tests for the UserServiceImpl class.
+ * Tests to subscribe, unsubscribe, retrieve all, and retrieve by id.
+ * @author Zimeng Wang
+ * @author Wenxin Li
+ * @author Mengying Liu
+ */
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +21,17 @@ public class UserServiceImplTest {
 
     private UserServiceImpl userService;
 
+    /**
+     * Sets up the test environment before each test method is executed.
+     */
     @Before
     public void setUp() {
         userService = new UserServiceImpl();
     }
 
+    /**
+     * Tests to login with valid credentials
+     */
     @Test
     public void testLoginSuccess() {
         // Create a user 
@@ -32,14 +44,20 @@ public class UserServiceImplTest {
         assertEquals(LoginResult.SUCCESS, result);
     }
 
+    /**
+     * Tests to login with invalid username
+     */
     @Test
     public void testLoginUserNotFound() {
-        // Perform login with non-existing user
+        
         LoginResult result = userService.login("nonExistingUser", "password123");
 
         assertEquals(LoginResult.USER_NOT_FOUND, result);
     }
 
+    /**
+     * Tests to login with invalid password
+     */
     @Test
     public void testLoginInvalidPassword() {
         // Create a user with known credentials
@@ -52,7 +70,9 @@ public class UserServiceImplTest {
         assertEquals(LoginResult.INVALID_PASSWORD, result);
     }
 
-
+     /**
+     * Tests to register for existing customers
+     */
     @Test
     public void testRegisterExistingUser() {
         // Register an existing user
